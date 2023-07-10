@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+
+{% block title %}Rookio - Create new Room{% endblock title %}
+
+{% block content %}
+<h2 class="mb-4 text-2xl">Add new Room</h2>
+<form method="post" class="bg-white p-6 rounded shadow-lg">
+    {% csrf_token %}
+{#    {{ form.as_p }}#}
+    {% if form.non_field_errors %}
+        <div class="mb-4 text-red-500">
+            {{ form.non_field_errors }}
+        </div>
+    {% endif %}
+
+    <div class="mb-4">
+        <label for="{{ form.room_type.id_for_label }}" class="block mb-2">Room type</label>
+        <select id="{{ form.room_type.id_for_label }}" class="border p-2 w-full" name="{{ form.room_type.name }}">
+            {% for value, display in form.room_type.field.choices %}
+                <option value="{{ value }}" {% if form.room_type.value == value %}selected{% endif %}>{{ display }}</option>
+            {% endfor %}
+        </select>
+        {% if form.room_type.errors %}
+            <div class="text-red-500">{{ form.room_type.errors }}</div>
+        {% endif %}
+    </div>
+
+    <div class="mb-4">
+        <label for="{{ form.name.id_for_label }}" class="block mb-2">Room name</label>
+        <input id="{{ form.name.id_for_label }}" class="border p-2 w-full" type="text" name="{{ form.name.name }}" value="{{ form.name.value|default:'' }}">
+        {% if form.name.errors %}
+            <div class="text-red-500">{{ form.name.errors }}</div>
+        {% endif %}
+    </div>
+
+    <div class="mb-4">
+        <label for="{{ form.description.id_for_label }}" class="block mb-2">Room description</label>
+        <input id="{{ form.description.id_for_label }}" class="border p-2 w-full" type="text" name="{{ form.description.name }}" value="{{ form.description.value|default:'' }}">
+        {% if form.description.errors %}
+            <div class="text-red-500">{{ form.description.errors }}</div>
+        {% endif %}
+    </div>
+
+    <div class="mb-4">
+        <label for="{{ form.place.id_for_label }}" class="block mb-2">Place</label>
+        <input id="{{ form.place.id_for_label }}" class="border p-2 w-full" type="text" name="{{ form.place.name }}" value="{{ form.place.value|default:'' }}">
+        {% if form.place.errors %}
+            <div class="text-red-500">{{ form.place.errors }}</div>
+        {% endif %}
+    </div>
+
+
+
+
+{#    TODO - place for google maps API#}
+
+
+
+
+    <div class="mb-4">
+        <label for="{{ form.gps_description.id_for_label }}" class="block mb-2">GPS place description</label>
+        <input id="{{ form.gps_description.id_for_label }}" class="border p-2 w-full" type="text" name="{{ form.gps_description.name }}" value="{{ form.gps_description.value|default:'' }}">
+        {% if form.gps_description.errors %}
+            <div class="text-red-500">{{ form.gps_description.errors }}</div>
+        {% endif %}
+    </div>
+
+    <div class="mb-4">
+        <label for="{{ form.gps_lat.id_for_label }}" class="block mb-2">GPS latitude of place</label>
+        <input id="{{ form.gps_lat.id_for_label }}" class="border p-2 w-full" type="text" name="{{ form.gps_lat.name }}" value="{{ form.gps_lat.value|default:'' }}">
+        {% if form.gps_lat.errors %}
+            <div class="text-red-500">{{ form.gps_lat.errors }}</div>
+        {% endif %}
+    </div>
+
+    <div class="mb-4">
+        <label for="{{ form.gps_lng.id_for_label }}" class="block mb-2">GPS longitude of place</label>
+        <input id="{{ form.gps_lng.id_for_label }}" class="border p-2 w-full" type="text" name="{{ form.gps_lng.name }}" value="{{ form.gps_lng.value|default:'' }}">
+        {% if form.gps_lng.errors %}
+            <div class="text-red-500">{{ form.gps_lng.errors }}</div>
+        {% endif %}
+    </div>
+
+    <div class="mb-4">
+        <label for="{{ form.date.id_for_label }}" class="block mb-2">Date(yyyy-mm-dd)</label>
+        <input id="{{ form.date.id_for_label }}" class="border p-2 w-full" type="text" name="{{ form.date.name }}" value="{{ form.date.value|default:'' }}">
+        {% if form.date.errors %}
+            <div class="text-red-500">{{ form.date.errors }}</div>
+        {% endif %}
+    </div>
+
+    <div class="mb-4">
+        <label for="{{ form.time.id_for_label }}" class="block mb-2">Time(hh:mm / hh:mm:ss)</label>
+        <input id="{{ form.time.id_for_label }}" class="border p-2 w-full" type="text" name="{{ form.time.name }}" value="{{ form.time.value|default:'' }}">
+        {% if form.time.errors %}
+            <div class="text-red-500">{{ form.time.errors }}</div>
+        {% endif %}
+    </div>
+
+    <div class="mb-4">
+        <label for="{{ form.outdoor.id_for_label }}" class="block mb-2">Outdoor</label>
+        <input id="{{ form.outdoor.id_for_label }}" class="border mr-2" type="checkbox" name="{{ form.outdoor.name }}" {% if form.outdoor.value %}checked{% endif %}>
+        {% if form.outdoor.errors %}
+            <div class="text-red-500">{{ form.outdoor.errors }}</div>
+        {% endif %}
+    </div>
+
+    <div class="mb-4">
+        <label for="{{ form.contact_public.id_for_label }}" class="block mb-2">Owner contact</label>
+        <input id="{{ form.contact_public.id_for_label }}" class="border p-2 w-full" type="text" name="{{ form.contact_public.name }}" value="{{ form.contact_public.value|default:'' }}">
+        {% if form.contact_public.errors %}
+            <div class="text-red-500">{{ form.contact_public.errors }}</div>
+        {% endif %}
+    </div>
+
+    <div class="mb-4">
+        <label for="{{ form.contact_after_assignment.id_for_label }}" class="block mb-2">Owner contact for attendees</label>
+        <input id="{{ form.contact_after_assignment.id_for_label }}" class="border p-2 w-full" type="text" name="{{ form.contact_after_assignment.name }}" value="{{ form.contact_after_assignment.value|default:'' }}">
+        {% if form.contact_after_assignment.errors %}
+            <div class="text-red-500">{{ form.contact_after_assignment.errors }}</div>
+        {% endif %}
+    </div>
+
+    <div class="mb-4">
+        <label for="{{ form.age_restriction.id_for_label }}" class="block mb-2">Age restrictions</label>
+        <input id="{{ form.age_restriction.id_for_label }}" class="border p-2 w-full" type="text" name="{{ form.age_restriction.name }}" value="{{ form.age_restriction.value|default:'' }}">
+        {% if form.age_restriction.errors %}
+            <div class="text-red-500">{{ form.age_restriction.errors }}</div>
+        {% endif %}
+    </div>
+
+    <div class="mb-4">
+        <label for="{{ form.age_recommendation.id_for_label }}" class="block mb-2">Age recommendation</label>
+        <input id="{{ form.age_recommendation.id_for_label }}" class="border p-2 w-full" type="text" name="{{ form.age_recommendation.name }}" value="{{ form.age_recommendation.value|default:'' }}">
+        {% if form.age_recommendation.errors %}
+            <div class="text-red-500">{{ form.age_recommendation.errors }}</div>
+        {% endif %}
+    </div>
+
+    <div class="mb-4">
+        <label for="{{ form.minimum_participants.id_for_label }}" class="block mb-2">Minimum participant</label>
+        <input id="{{ form.minimum_participants.id_for_label }}" class="border p-2 w-full" type="text" name="{{ form.minimum_participants.name }}" value="{{ form.minimum_participants.value|default:'' }}">
+        {% if form.minimum_participants.errors %}
+            <div class="text-red-500">{{ form.minimum_participants.errors }}</div>
+        {% endif %}
+    </div>
+
+    <div class="mb-4">
+        <label for="{{ form.maximum_participants.id_for_label }}" class="block mb-2">Maximum participant</label>
+        <input id="{{ form.maximum_participants.id_for_label }}" class="border p-2 w-full" type="text" name="{{ form.maximum_participants.name }}" value="{{ form.maximum_participants.value|default:'' }}">
+        {% if form.maximum_participants.errors %}
+            <div class="text-red-500">{{ form.maximum_participants.errors }}</div>
+        {% endif %}
+    </div>
+
+    <button type="submit" class="bg-blue-500 text-white p-2 rounded">Add Room</button>
+</form>
+{% endblock %}

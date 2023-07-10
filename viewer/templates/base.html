@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <!-- Tailwind CSS file -->
+    <link href="{% static 'output.css' %}" rel="stylesheet">
+</head>
+<body class="bg-gray-200 text-gray-800">
+    <header>
+        <nav class="p-2 bg-white flex justify-between items-center">
+            <div class="flex items-center">
+                <a href="{% url 'welcome' %}" class="text-gray-800 text-2xl font-bold">Rookio Logo</a>
+                <a href="{% url 'rooms_overview' %}" class="p-6 ml-4 text-gray-800">Rooms Overview</a>
+                <a href="#" class="p-2 ml-4 text-gray-800">Link 2</a>
+                <a href="#" class="p-2 ml-4 text-gray-800">Link 3</a>
+                <a href="#" class="p-2 ml-4 text-gray-800">Link 4</a>
+                <a href="#" class="p-2 ml-4 text-gray-800">Link 5</a>
+                {% if user.is_authenticated %}
+                <a href="{% url 'add_room' %}" class="p-2 ml-4 text-gray-800">Add new Room</a>
+                {% endif %}
+            </div>
+            <div id="auth-buttons" class="flex items-center">
+                {% if user.is_authenticated %}
+                    <!-- If the user is authenticated, display the user's name and the logout button -->
+                    <span class="mr-4">Hello, {{ user.username }}!</span>
+                    <a href="{% url 'logout' %}" class="ml-4">Logout</a>
+                {% else %}
+                     <!-- If the user is not authenticated, display the login and registration buttons -->
+                    <a href="{% url 'login' %}" id="login-button" class="ml-4">Login</a>
+                    <a href="{% url 'register' %}" id="register-button" class="ml-4">Register</a>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
+    <main class="p-6">
+
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+        {% block content %}
+        {% endblock content %}
+    </main>
+</body>
+</html>
+
+{#    <script>#}
+{#     // Showing and hiding the login and registration forms when the button are clicked#}
+{#      document.getElementById('login-btn').addEventListener('click', function() {#}
+{#         document.getElementById('login-form').style.display = 'block';#}
+{#         document.getElementById('register-form').style.display = 'none';#}
+{#       });#}
+{##}
+{#       document.getElementById('register-btn').addEventListener('click', function() {#}
+{#         document.getElementById('register-form').style.display = 'block';#}
+{#         document.getElementById('login-form').style.display = 'none';#}
+{#       });#}
+
+{#      // very basic real-time Username length validation#}
+     {#if (document.getElementById('id_username') !== undefined && document.getElementById('id_username') !== null ) {#}
+     {#    document.getElementById('id_username').addEventListener('input', function (e) {#}
+     {#        if (e.target.value.length < 3) {#}
+     {#            // the username is too short#}
+     {#            e.target.setCustomValidity('Username must be at least 3 characters long.');#}
+     {#        } else {#}
+     {#            // the username is long enough#}
+     {#            e.target.setCustomValidity('');#}
+     {#        }#}
+     {#    });#}
+     {# }#}
+
+{#    </script>#}
+{#</body>#}
+{#</html>#}

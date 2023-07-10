@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Rookio - Rooms Overview{% endblock title %}
+
+{% block content %}
+<h2>Rooms:</h2>
+<ul>
+    {% for room in rooms %}
+    <li>
+        <h3>{{ room.name }}</h3>
+        <h4>Owners: </h4>
+            <ul>
+            {% for owner in room.owners.all %}
+                <li>{{ owner.name }} - {{ owner.get_permission_display }}</li>
+            {% endfor %}
+            </ul>
+        <p>Type: {{ room.get_room_type_display }}</p>
+        <p>Description: {{ room.description }}</p>
+        <p>Todo : </p>
+
+    </li>
+    {% empty %}
+    <li>No rooms available.</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

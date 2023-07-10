@@ -119,8 +119,12 @@
 ## SageMath parsed files
 #*.sage.py
 #
-## Environments
-#.env
+#others random
+#excluded bc of possible large files
+node_modules/
+#
+# Environments
+.env
 #.venv
 #env/
 #venv/

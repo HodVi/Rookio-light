@@ -5,12 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="34bf23ce-0f23-4c8a-a234-516d2d35d0cf" name="Changes" comment="initial commit">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/SDA-Final-Project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/SDA-Final-Project.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Obsah-funkcionality-before_removeParticipantRoomAssign_addTwoFieldsGPScoordinates.drawio" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Obsah-funkcionality.drawio" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+        <option value="HTML File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Merge.Settings">
     <option name="BRANCH" value="origin/main" />
@@ -19,13 +36,17 @@
     <branch-grouping />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="develop" />
+        <entry key="$PROJECT_DIR$" value="feature" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="SYNC" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2RQxisB0TlTiXa68rrcJO5UnnVd" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -36,18 +57,33 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "D:/Projects/SDA-Final-Project",
+    "git-widget-placeholder": "develop",
+    "javascript.nodejs.core.library.configured.version": "18.16.1",
+    "javascript.nodejs.core.library.typings.version": "18.16.1",
+    "last_opened_file_path": "D:/Projects/SDA-Final-Project/Rookio/settings.py",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "sqlite"
+    ]
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Projects\SDA-Final-Project" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration>C:\Users\Alfonz\AppData\Roaming\Subversion</configuration>
@@ -65,6 +101,27 @@
       <workItem from="1687295999237" duration="48000" />
       <workItem from="1687296055381" duration="1205000" />
       <workItem from="1687360337048" duration="5041000" />
+      <workItem from="1687428563020" duration="1797000" />
+      <workItem from="1687596209457" duration="631000" />
+      <workItem from="1687625993823" duration="1840000" />
+      <workItem from="1687703023313" duration="20000" />
+      <workItem from="1687971704266" duration="3105000" />
+      <workItem from="1688304042873" duration="17460000" />
+      <workItem from="1688372959290" duration="10282000" />
+      <workItem from="1688668871382" duration="603000" />
+      <workItem from="1688750164341" duration="8356000" />
+      <workItem from="1688801337026" duration="36000" />
+      <workItem from="1688802766667" duration="14835000" />
+      <workItem from="1688888622622" duration="2800000" />
+      <workItem from="1688893356066" duration="16000" />
+      <workItem from="1688893382400" duration="1122000" />
+      <workItem from="1688894675533" duration="27000" />
+      <workItem from="1688894800923" duration="83000" />
+      <workItem from="1688894914714" duration="855000" />
+      <workItem from="1688895969622" duration="42000" />
+      <workItem from="1688896121590" duration="3895000" />
+      <workItem from="1688900078076" duration="25863000" />
+      <workItem from="1688967621689" duration="38660000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1687198242751</created>

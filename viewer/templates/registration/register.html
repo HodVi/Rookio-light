@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block title %}Register{% endblock title %}
+
+{% block content %}
+<h2>Register</h2>
+<form method="post">
+    {% csrf_token %}
+{#    {{ form.as_p }}#}
+{#    usage of combo label-input-div instead of form.as_p is bc of more css flexibility #}
+{#    pattern is used for hold already filled in values to form -> value="{{ form.username.value|default_if_none:'' }}"#}
+    <div class="mb-4">
+        <label class="block" for="id_username">Username:</label>
+        <input class="border border-gray-200 rounded p-2" id="id_username" type="text" name="username" required value="{{ form.username.value|default_if_none:'' }}">
+        <div class="text-red-500 text-xs mt-2">{{ form.username.errors }}</div>
+    </div>
+
+    <div class="mb-4">
+        <label class="block" for="id_first_name">First Name:</label>
+        <input class="border border-gray-200 rounded p-2" id="id_first_name" type="text" name="first_name" required value="{{ form.first_name.value|default_if_none:'' }}">
+        <div class="text-red-500 text-xs mt-2">{{ form.first_name.errors }}</div>
+    </div>
+
+    <div class="mb-4">
+        <label class="block" for="id_last_name">Last Name:</label>
+        <input class="border border-gray-200 rounded p-2" id="id_last_name" type="text" name="last_name" required value="{{ form.last_name.value|default_if_none:'' }}">
+        <div class="text-red-500 text-xs mt-2">{{ form.last_name.errors }}</div>
+    </div>
+
+    <div class="mb-4">
+        <label class="block" for="id_email">Email:</label>
+        <input class="border border-gray-200 rounded p-2" id="id_email" type="email" name="email" required value="{{ form.email.value|default_if_none:'' }}">
+        <div class="text-red-500 text-xs mt-2">{{ form.email.errors }}</div>
+    </div>
+
+    <div class="mb-4">
+        <label class="block" for="id_password1">Password:</label>
+        <input class="border border-gray-200 rounded p-2" id="id_password1" type="password" name="password1" required>
+        <div class="text-red-500 text-xs mt-2">{{ form.password1.errors }}</div>
+    </div>
+
+    <div class="mb-4">
+        <label class="block" for="id_password2">Confirm Password:</label>
+        <input class="border border-gray-200 rounded p-2" id="id_password2" type="password" name="password2" required>
+        <div class="text-red-500 text-xs mt-2">{{ form.password2.errors }}</div>
+    </div>
+
+    <button type="submit">Register button</button>
+</form>
+{% endblock %}
+
+
+{# <script>#}
+{#    document.getElementById('register-form').addEventListener('submit', function(event) {#}
+{#        event.preventDefault();#}
+{#        const formData = new FormData(this);#}
+{#        fetch(this.action, {#}
+{#            method: 'POST',#}
+{#            body: formData,#}
+{#            headers: {#}
+{#              'X-Requested-With': 'XMLHttpRequest',  // Indicate this is an AJAX request.#}
+{#              'X-CSRFToken': this.querySelector('input[name=csrfmiddlewaretoken]').value#}
+{#            }#}
+{#        })#}
+{#          .then(response => {#}
+{#            if (response.ok) {#}
+{#              // If the response was OK, return the JSON data.#}
+{#              return response.json();#}
+{#            } else {#}
+{#              // If the response was not OK, throw an error.#}
+{#              throw new Error('Server response was not OK');#}
+{#            }#}
+{#          })#}
+{#          .then(response => response.json())#}
+{#          .then(data => {#}
+{#            if (data.status === 'success') {#}
+{#              // Registration was successful. Display a popup window#}
+{#              document.getElementById('login-form-container').style.display = 'block';#}
+{#              alert('Registration successful. Please log in.');#}
+{#            } else {#}
+{#              // Registration failed. Display the form errors.#}
+{#              for (let field in data) {#}
+{#                let errorElement = document.querySelector('.' + field + '-error');#}
+{#                errorElement.textContent = data[field];#}
+{#              }#}
+{#            }#}
+{#          })#}
+{#          .catch(error => {#}
+{#            console.error('There was an error:', error);#}
+{#          });#}
+{#        });#}
+{#  </script>#}
+{#{% endblock %}#}
