@@ -32,6 +32,6 @@ class RoomForm(forms.ModelForm):
                   'contact_after_assignment',
                   'age_restriction',
                   'age_recommendation',
-                  'minimum_participants'
-                  # 'maximum_participants'
+                  'minimum_participants',
+                  'maximum_participants'
                   ]

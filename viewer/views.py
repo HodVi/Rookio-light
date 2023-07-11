@@ -62,21 +62,55 @@ def add_room(request):
         form = RoomForm(request.POST)
         if form.is_valid():
             new_room = form.save(commit=False)
-            # PersonOwner object for the current user, or create a new one if it doesn't exist.
-            person_owner, created = PersonOwner.objects.get_or_create(user=request.user, defaults={
-                # 'permission': PersonOwner.PERMISSION1ADMIN})
-                # person_owner.permission = 'PERMISSION1ADMIN'
+            # ###  /1  ##########################################################################
+            # # PersonOwner object for the current user, or create a new one if it doesn't exist.
+            # person_owner, created = PersonOwner.objects.get_or_create(user_person_owner=request.user, defaults={
+            #     # 'permission': PersonOwner.PERMISSION1ADMIN})
+            #     # person_owner.permission = 'PERMISSION1ADMIN'})
+            #     'permission': PersonOwner.PERMISSION_CHOICES[0][0]})
+            # if created:
+            #     # If the PersonOwner object was newly created, set the permission level.
+            #     # person_owner.permission = PersonOwner.PERMISSION1ADMIN
+            #     # person_owner.permission = 'PERMISSION1ADMIN'
+            #     person_owner.permission = PersonOwner.PERMISSION_CHOICES[0][0]
+            #     person_owner.save()
+            # new_room.person_owner = person_owner
+            # new_room.save()
+            # ###  1/  ##########################################################################
+
+            # ###  /2  ##########################################################################
+            # try:
+            #     person_owner = request.user.person_owner
+            # except PersonOwner.DoesNotExist:
+            #     # If not, create a new PersonOwner for the user
+            #     person_owner = PersonOwner.objects.create(user_person_owner=request.user, permission='permission1admin')
+            #
+            # new_room.person_owner = person_owner
+            # new_room.save()
+            #
+            # # Create link in the intermediary table
+            # new_room.person_owner.add(person_owner)
+            #
+            # messages.success(request, "Room created successfully!")
+            #
+            # ###  2/  ##########################################################################
+
+            # ###  /3  ##########################################################################
+            person_owner, created = PersonOwner.objects.get_or_create(user_person_owner=request.user, defaults={
                 'permission': PersonOwner.PERMISSION_CHOICES[0][0]})
             if created:
-                # If the PersonOwner object was newly created, set the permission level.
-                # person_owner.permission = PersonOwner.PERMISSION1ADMIN
-                # person_owner.permission = 'PERMISSION1ADMIN'
                 person_owner.permission = PersonOwner.PERMISSION_CHOICES[0][0]
                 person_owner.save()
-            new_room.person_owner = person_owner
-            new_room.save()
+            new_room.save()  # First save the room !!
+            new_room.owners.add(person_owner)  # Then add the owner
+            messages.success(request, "Room created successfully!")
+            # ###  3/  ##########################################################################
 
             return redirect('welcome')  # TODO redirect to "Show Rooms" page
+        else:
+            for field in form:
+                for error in field.errors:
+                    messages.error(request, f"{field.label}: {error}")
     else:
         form = RoomForm()
     return render(request, 'add_room.html', {'form': form})
