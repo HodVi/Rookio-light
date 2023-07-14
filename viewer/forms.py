@@ -2,7 +2,9 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
-from viewer.models import Room
+from django.core.exceptions import ValidationError
+
+from viewer.models import Room, Tag
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -35,3 +37,15 @@ class RoomForm(forms.ModelForm):
                   'minimum_participants',
                   'maximum_participants'
                   ]
+
+
+class TagForm(forms.Form):
+    name = forms.CharField(max_length=25)
+
+    def clean_name(self):
+        name = self.cleaned_data.get('name')
+        if not name:
+            raise ValidationError("Tag name cannot be empty.")
+        if Tag.objects.filter(name=name).exists():
+            raise ValidationError("Tag with this name already exists.")
+        return name

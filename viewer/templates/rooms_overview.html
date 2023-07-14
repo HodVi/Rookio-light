@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load tz %}
 
 {% block title %}Rookio - Rooms Overview{% endblock title %}
 
@@ -13,7 +14,7 @@
             <h4 class="text-lg mt-2">Owners:</h4>
             <ul class="list-disc list-inside">
                 {% for owner in room.owners.all %}
-                <li class="mt-1 text-yellow-500">
+                <li class="mt-1 text-purple-900">
                     {% if owner.user_person_owner.first_name and owner.user_person_owner.last_name %}
                         {{ owner.user_person_owner.first_name }} {{ owner.user_person_owner.last_name }}
                     {% else %}
@@ -25,6 +26,21 @@
             </ul>
             <p class="mt-2"><span class="font-bold">Type:</span> {{ room.get_room_type_display }}</p>
             <p class="mt-2"><span class="font-bold">Description:</span> {{ room.description }}</p>
+            <p class="mt-2"><span class="font-bold">Place:</span> {{ room.place }}</p>
+            <p class="mt-2"><span class="font-bold">GPS place description:</span> {{ room.gps_description }}</p>
+            <p class="mt-2"><span class="font-bold">GPS latitude of place:</span> {{ room.gps_lat }}</p>
+            <p class="mt-2"><span class="font-bold">GPS longitude of place:</span> {{ room.gps_lng }}</p>
+            <p class="mt-2"><span class="font-bold">Date:</span> {{ room.date|date:'d.m.Y' }} </p>
+{#            TODO - fix timezone#}
+            <p class="mt-2"><span class="font-bold">Time:</span> {{ room.time|time:'H:i' }} {{ room.time|timezone:'Europe/Bratislava' }}</p>
+            <p class="mt-2"><span class="font-bold">Contact:</span> {{ room.contact_public }}</p>
+{#            TODO - Additional Contact -> make it visible only for event attendants#}
+            <p class="mt-2"><span class="font-bold">Additional Contact:</span> {{ room.contact_after_assignment }}</p>
+            <p class="mt-2"><span class="font-bold">Age restriction:</span> {{ room.age_restriction }}</p>
+            <p class="mt-2"><span class="font-bold">Age recommendation:</span> {{ room.age_recommendation }}</p>
+            <p class="mt-2"><span class="font-bold">Number of available places:</span> {{ number_of_available_places }}</p>
+{#            TODO - make it visible only if Room type is event#}
+            <p class="mt-2"><span class="font-bold">Minimum number of people to start the event:</span> {{ room.minimum_participants }}</p>
             <p class="mt-2">Todo :</p>
         </li>
         {% empty %}

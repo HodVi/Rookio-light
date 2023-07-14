@@ -4,12 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="34bf23ce-0f23-4c8a-a234-516d2d35d0cf" name="Changes" comment="added new templates, models, forms, views&#10;added Tailwind for css&#10;updated requirements">
+    <list default="true" id="34bf23ce-0f23-4c8a-a234-516d2d35d0cf" name="Changes" comment="fixed - assigning the currently logged-in user as the owner of the newly created room&#10;added - display of owner's name to rooms overview&#10;      - style to rooms_overview.html&#10;modified - rebuild of output.css">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/output.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/output.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/viewer/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/viewer/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/viewer/templates/add_room.html" beforeDir="false" afterPath="$PROJECT_DIR$/viewer/templates/add_room.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/viewer/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/viewer/templates/base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/viewer/templates/rooms_overview.html" beforeDir="false" afterPath="$PROJECT_DIR$/viewer/templates/rooms_overview.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/viewer/templates/welcome.html" beforeDir="false" afterPath="$PROJECT_DIR$/viewer/templates/welcome.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/viewer/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/viewer/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -121,7 +124,9 @@
       <workItem from="1688896121590" duration="3895000" />
       <workItem from="1688900078076" duration="25863000" />
       <workItem from="1688967621689" duration="44608000" />
-      <workItem from="1689090140005" duration="14704000" />
+      <workItem from="1689090140005" duration="14987000" />
+      <workItem from="1689175950533" duration="10046000" />
+      <workItem from="1689234831569" duration="9693000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1687198242751</created>
@@ -152,7 +157,15 @@
       <option name="project" value="LOCAL" />
       <updated>1689011427986</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="fixed - assigning the currently logged-in user as the owner of the newly created room&#10;added - display of owner's name to rooms overview&#10;      - style to rooms_overview.html&#10;modified - rebuild of output.css">
+      <option name="closed" value="true" />
+      <created>1689105919147</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1689105919147</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -175,6 +188,7 @@
     </ignored-roots>
     <MESSAGE value="initial commit" />
     <MESSAGE value="added new templates, models, forms, views&#10;added Tailwind for css&#10;updated requirements" />
-    <option name="LAST_COMMIT_MESSAGE" value="added new templates, models, forms, views&#10;added Tailwind for css&#10;updated requirements" />
+    <MESSAGE value="fixed - assigning the currently logged-in user as the owner of the newly created room&#10;added - display of owner's name to rooms overview&#10;      - style to rooms_overview.html&#10;modified - rebuild of output.css" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed - assigning the currently logged-in user as the owner of the newly created room&#10;added - display of owner's name to rooms overview&#10;      - style to rooms_overview.html&#10;modified - rebuild of output.css" />
   </component>
 </project>

@@ -33,6 +33,7 @@
         {% endif %}
     </div>
 
+{#    TODO stretch description field more to the bottom/top#}
     <div class="mb-4">
         <label for="{{ form.description.id_for_label }}" class="block mb-2">Room description</label>
         <input id="{{ form.description.id_for_label }}" class="border p-2 w-full" type="text" name="{{ form.description.name }}" value="{{ form.description.value|default:'' }}">
@@ -81,6 +82,7 @@
         {% endif %}
     </div>
 
+{#    TODO - if Room name or Room description is already filled in, then try to read any number string and put it into date field     #}
     <div class="mb-4">
         <label for="{{ form.date.id_for_label }}" class="block mb-2">Date(yyyy-mm-dd)</label>
         <input id="{{ form.date.id_for_label }}" class="border p-2 w-full" type="text" name="{{ form.date.name }}" value="{{ form.date.value|default:'' }}">
