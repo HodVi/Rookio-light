@@ -11,6 +11,15 @@
         {% for room in rooms %}
         <li class="mb-4 border rounded p-4 border-red-900">
             <h3 class="text-xl font-bold">{{ room.name }}</h3>
+
+{#            <p class="mt-2"><span class="font-bold">Tags:</span>#}
+                {% for tag in room.tags.all %}
+                    {{ tag.name }}{% if not forloop.last %} ‧ {% endif %}
+                {% empty %}
+                    No tags.
+                {% endfor %}
+{#            </p>#}
+
             <h4 class="text-lg mt-2">Owners:</h4>
             <ul class="list-disc list-inside">
                 {% for owner in room.owners.all %}

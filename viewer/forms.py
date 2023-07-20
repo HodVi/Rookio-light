@@ -40,12 +40,13 @@ class RoomForm(forms.ModelForm):
 
 
 class TagForm(forms.Form):
-    name = forms.CharField(max_length=25)
+    name = forms.CharField(max_length=25, label='Tags')
 
     def clean_name(self):
         name = self.cleaned_data.get('name')
         if not name:
             raise ValidationError("Tag name cannot be empty.")
-        if Tag.objects.filter(name=name).exists():
-            raise ValidationError("Tag with this name already exists.")
+        # this part is no longer needed because we WANT an existing tag to be assigned to a newly created room
+        # if Tag.objects.filter(name=name).exists():
+        #     raise ValidationError("Tag with this name already exists.")
         return name
