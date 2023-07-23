@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate, login as auth_login, logout as aut
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from viewer.forms import CustomUserCreationForm, RoomForm, TagForm
 
@@ -106,6 +106,23 @@ def add_room(request):
         room_form = RoomForm()
         tag_names = ['']
     return render(request, 'add_room.html', {'room_form': room_form, 'tag_names': tag_names})
+
+
+@login_required
+def my_rooms(request):
+    try:
+        person_owner = PersonOwner.objects.get(user_person_owner=request.user)
+        my_rooms_list = Room.objects.filter(owners__permission=PersonOwner.PERMISSION_CHOICES[0][0], owners=person_owner)
+        return render(request, 'my_rooms.html', {'rooms': my_rooms_list})
+    except PersonOwner.DoesNotExist:
+        # messages.info(request, f"{request.user.username}, you have not yet created any room.")
+        return render(request, 'my_rooms.html')
+
+
+@login_required
+def room_detail(request, room_id):
+    room = get_object_or_404(Room, id=room_id)
+    return render(request, 'room_detail.html', {'room': room})
 
 
 def rooms_overview(request):

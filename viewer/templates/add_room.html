@@ -25,22 +25,6 @@
         {% endif %}
     </div>
 
-{#    <div id="tag-forms" class="space-y-4">#}
-{#    {% for tag_form in tag_forms %}#}
-{#        <div class="tag-form">#}
-{#            <label for="{{ tag_form.name.id_for_label }}" class="block mb-2">{{ tag_form.name.label }}</label>#}
-{#            <div class="flex items-center">#}
-{#                <input id="{{ tag_form.name.id_for_label }}" class="border p-2 w-full" type="text" name="{{ tag_form.name.name }}" value="{{ tag_form.name.value|default:'' }}">#}
-{#                <button type="button" class="remove-tag ml-2 p-1 bg-red-500 text-white rounded">Remove</button>#}
-{#            </div>#}
-{#            {% if tag_form.name.errors %}#}
-{#                <div class="text-red-500">{{ tag_form.name.errors }}</div>#}
-{#            {% endif %}#}
-{#        </div>#}
-{#    {% endfor %}#}
-{#    </div>#}
-{#    <button type="button" id="add-tag" class="mt-4 p-2 bg-blue-500 text-white rounded">Add Tag</button>#}
-
     <div id="tag-container" class="space-y-4">
         {% for tag_name in tag_names %}
         <div class="tag-field">

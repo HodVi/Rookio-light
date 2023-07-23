@@ -21,7 +21,9 @@
                 <a href="#" class="p-2 ml-4 text-gray-800">Link 2</a>
                 <a href="#" class="p-2 ml-4 text-gray-800">Link 3</a>
                 <a href="#" class="p-2 ml-4 text-gray-800">Link 4</a>
-                <a href="#" class="p-2 ml-4 text-gray-800">Link 5</a>
+                {% if user.is_authenticated %}
+                <a href="{% url 'my_rooms' %}" class="p-2 ml-4 text-gray-800">My Rooms</a>
+                {% endif %}
                 {% if user.is_authenticated %}
                 <a href="{% url 'add_room' %}" class="p-2 ml-4 text-gray-800">Add new Room</a>
                 {% endif %}
@@ -54,32 +56,3 @@
     </main>
 </body>
 </html>
-
-{#    <script>#}
-{#     // Showing and hiding the login and registration forms when the button are clicked#}
-{#      document.getElementById('login-btn').addEventListener('click', function() {#}
-{#         document.getElementById('login-form').style.display = 'block';#}
-{#         document.getElementById('register-form').style.display = 'none';#}
-{#       });#}
-{##}
-{#       document.getElementById('register-btn').addEventListener('click', function() {#}
-{#         document.getElementById('register-form').style.display = 'block';#}
-{#         document.getElementById('login-form').style.display = 'none';#}
-{#       });#}
-
-{#      // very basic real-time Username length validation#}
-     {#if (document.getElementById('id_username') !== undefined && document.getElementById('id_username') !== null ) {#}
-     {#    document.getElementById('id_username').addEventListener('input', function (e) {#}
-     {#        if (e.target.value.length < 3) {#}
-     {#            // the username is too short#}
-     {#            e.target.setCustomValidity('Username must be at least 3 characters long.');#}
-     {#        } else {#}
-     {#            // the username is long enough#}
-     {#            e.target.setCustomValidity('');#}
-     {#        }#}
-     {#    });#}
-     {# }#}
-
-{#    </script>#}
-{#</body>#}
-{#</html>#}

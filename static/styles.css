@@ -1,3 +1,10 @@
+
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+@keyframes blink {
+  0% {opacity: 1;}
+  65% {opacity: 1;}
+  100% {opacity: 0;}
+}

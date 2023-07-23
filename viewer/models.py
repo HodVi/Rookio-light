@@ -27,7 +27,7 @@ class Tag(TimeStamp):
 class PersonOwner(TimeStamp):
 
     PERMISSION_CHOICES = (
-        ('PERMISSION1ADMIN', 'Admin/Creator'),  # DON'T CHANGE the content or order - views.py def add_room(request)
+        ('PERMISSION1ADMIN', 'Admin/Creator'),  # DO NOT CHANGE the content or order - views.py def add_room(request)
         ('PERMISSION2MOD', 'Moderator'),
         ('PERMISSION3VIEWER', 'Viewer'),
     )

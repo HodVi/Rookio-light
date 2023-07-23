@@ -5,7 +5,11 @@ module.exports = {
       //'../another_app/templates/**/*.html',
   ],
   theme: {
-    extend: {},
+    extend: {
+      animation: {
+        'blink': 'blink 1500ms infinite',
+      }
+    },
   },
   plugins: [],
 }
