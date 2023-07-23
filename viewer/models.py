@@ -41,7 +41,7 @@ class PersonOwner(TimeStamp):
 
 
 class Template(TimeStamp):
-    name = models.CharField(max_length=50, null=True, blank=True, unique=True)
+    name = models.CharField(max_length=50, unique=True)
 
     def __str__(self) -> str:
         return f'Model Template - name: {self.name}'
@@ -105,7 +105,7 @@ class PersonParticipant(TimeStamp):
                                                         on_delete=models.CASCADE,
                                                         null=True, blank=True,
                                                         related_name='participant_profile')
-    nickname_unregistered_participant = models.CharField(max_length=255, null=True, blank=True, unique=True)
+    nickname_unregistered_participant = models.CharField(max_length=255, unique=True)
     date_of_birth = models.DateField(blank=True)
     menu_items = models.ManyToManyField(MenuItem, related_name="participants")
 

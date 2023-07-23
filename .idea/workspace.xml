@@ -4,18 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="34bf23ce-0f23-4c8a-a234-516d2d35d0cf" name="Changes" comment="added - tag implementation into &quot;Add new Room&quot;, up to 10 tags per room -&gt; validation of uniqueness, re-rendering&#10;- display tags on the &quot;Rooms Overview&quot; page.">
-      <change afterPath="$PROJECT_DIR$/viewer/templates/my_rooms.html" afterDir="false" />
+    <list default="true" id="34bf23ce-0f23-4c8a-a234-516d2d35d0cf" name="Changes" comment="added - &quot;My Rooms&quot; overview of rooms created by logged-in user with possibility of redirection to details of selected room">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Rookio/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Rookio/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/output.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/output.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/tailwind.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/tailwind.config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/viewer/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/viewer/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/viewer/templates/add_room.html" beforeDir="false" afterPath="$PROJECT_DIR$/viewer/templates/add_room.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/viewer/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/viewer/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/viewer/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/viewer/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,7 +131,7 @@
       <workItem from="1689876239057" duration="472000" />
       <workItem from="1689876762255" duration="7073000" />
       <workItem from="1689965151933" duration="145000" />
-      <workItem from="1689965344650" duration="13448000" />
+      <workItem from="1689965344650" duration="15028000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1687198242751</created>
@@ -202,7 +194,15 @@
       <option name="project" value="LOCAL" />
       <updated>1689886806565</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="added - &quot;My Rooms&quot; overview of rooms created by logged-in user with possibility of redirection to details of selected room">
+      <option name="closed" value="true" />
+      <created>1690112414935</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1690112414935</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -229,6 +229,7 @@
     <MESSAGE value="added - time/date filter to Rooms Overview&#10;code cleaning" />
     <MESSAGE value="added - tag implementation into &quot;Add new Room&quot;, up to 10 tags per room -&gt; validation of uniqueness, re-rendering" />
     <MESSAGE value="added - tag implementation into &quot;Add new Room&quot;, up to 10 tags per room -&gt; validation of uniqueness, re-rendering&#10;- display tags on the &quot;Rooms Overview&quot; page." />
-    <option name="LAST_COMMIT_MESSAGE" value="added - tag implementation into &quot;Add new Room&quot;, up to 10 tags per room -&gt; validation of uniqueness, re-rendering&#10;- display tags on the &quot;Rooms Overview&quot; page." />
+    <MESSAGE value="added - &quot;My Rooms&quot; overview of rooms created by logged-in user with possibility of redirection to details of selected room" />
+    <option name="LAST_COMMIT_MESSAGE" value="added - &quot;My Rooms&quot; overview of rooms created by logged-in user with possibility of redirection to details of selected room" />
   </component>
 </project>
