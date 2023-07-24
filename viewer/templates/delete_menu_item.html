@@ -1,0 +1,12 @@
+{% extends 'room_detail.html' %}
+
+{% block modify %}
+<div class="container mx-auto px-4">
+    <h2 class="text-2xl font-bold mb-4">Delete Item:</h2>
+    <p>Are you sure you want to delete "{{ item.item_name }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="bg-red-500 text-white p-2 rounded">I'm sure, delete item</button>
+    </form>
+</div>
+{% endblock %}

@@ -18,12 +18,16 @@
 
     <div class="py-2 flex justify-between space-x-40">
         <div class="group inline-block relative">
-            <a href="{% url 'show_items' room.id %}" class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded inline-flex items-center">
+            {% if room.id %}
+                <a href="{% url 'show_items' room.id %}" class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded inline-flex items-center">
+            {% endif %}
             <span>Items</span>
             </a>
             <div class="absolute left-0 mt-2 py-2 w-auto bg-white rounded-lg shadow-xl border border-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex justify-center items-center">
-                <a href="{% url 'add_item' room.id %}" class="mx-2 w-20 py-2 text-white rounded bg-green-500 hover:bg-green-700 text-center">Add</a>
-                <a href="{% url 'edit_item' room.id %}" class="mx-2 w-20 py-2 text-white rounded bg-orange-500 hover:bg-orange-700 text-center">Edit</a>
+                {% if room.id %}
+                    <a href="{% url 'add_item' room.id %}" class="mx-2 w-20 py-2 text-white rounded bg-green-500 hover:bg-green-700 text-center">Add</a>
+                    <a href="{% url 'edit_item' room.id %}" class="mx-2 w-20 py-2 text-white rounded bg-orange-500 hover:bg-orange-700 text-center">Edit</a>
+                {% endif %}
             </div>
             </div>
 

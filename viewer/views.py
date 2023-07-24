@@ -143,6 +143,7 @@ def show_items(request, room_id):
     room = get_object_or_404(Room, id=room_id)
 
     return render(request, 'show_items.html', {'room': room})
+    # return render(request, 'edit_item.html', {'room': room})
 
 
 @login_required
@@ -154,7 +155,7 @@ def add_item(request, room_id):
             item = form.save(commit=False)
             item.room = room
             item.save()
-            return redirect('room_detail', room_id=room_id)
+            return redirect('show_items', room_id=room_id)
     else:
         form = MenuItemForm()
 
@@ -167,3 +168,27 @@ def edit_item(request, room_id):
     items = room.menu_items.all()
 
     return render(request, 'edit_item.html', {'room': room, 'items': items})
+
+
+@login_required
+def edit_menu_item(request, room_id, item_id):
+    room = get_object_or_404(Room, id=room_id)
+    item = get_object_or_404(MenuItem, room__id=room_id, id=item_id)
+    if request.method == 'POST':
+        form = MenuItemForm(request.POST, instance=item)
+        if form.is_valid():
+            form.save()
+            return redirect('edit_item', room_id=room_id)
+    else:
+        form = MenuItemForm(instance=item)
+    return render(request, 'edit_menu_item.html', {'form': form, 'room': room})
+
+
+@login_required
+def delete_menu_item(request, room_id, item_id):
+    room = get_object_or_404(Room, id=room_id)
+    item = get_object_or_404(MenuItem, room__id=room_id, id=item_id)
+    if request.method == 'POST':
+        item.delete()
+        return redirect('edit_item', room_id=room_id)
+    return render(request, 'delete_menu_item.html', {'item': item, 'room': room})

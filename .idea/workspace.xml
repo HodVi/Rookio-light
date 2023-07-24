@@ -4,20 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="34bf23ce-0f23-4c8a-a234-516d2d35d0cf" name="Changes" comment="added - makemigrations for Participant's nickname and template's name to be no longer Null/Blank True">
-      <change afterPath="$PROJECT_DIR$/viewer/templates/add_item.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/viewer/templates/edit_item.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/viewer/templates/show_items.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/viewer/templatetags/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/viewer/templatetags/filters.py" afterDir="false" />
+    <list default="true" id="34bf23ce-0f23-4c8a-a234-516d2d35d0cf" name="Changes" comment="added - Room detail extended with possibility to add items for selected room, created placeholder and templates for edit/delete options">
+      <change afterPath="$PROJECT_DIR$/viewer/templates/delete_menu_item.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/viewer/templates/edit_menu_item.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Rookio/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Rookio/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/output.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/output.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/tailwind.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/tailwind.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/viewer/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/viewer/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/viewer/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/viewer/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/viewer/templates/edit_item.html" beforeDir="false" afterPath="$PROJECT_DIR$/viewer/templates/edit_item.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/viewer/templates/room_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/viewer/templates/room_detail.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/viewer/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/viewer/views.py" afterDir="false" />
     </list>
@@ -146,7 +141,7 @@
       <workItem from="1689965151933" duration="145000" />
       <workItem from="1689965344650" duration="30355000" />
       <workItem from="1690182440079" duration="27198000" />
-      <workItem from="1690220363683" duration="1998000" />
+      <workItem from="1690220363683" duration="9489000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1687198242751</created>
@@ -225,7 +220,15 @@
       <option name="project" value="LOCAL" />
       <updated>1690114309415</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="added - Room detail extended with possibility to add items for selected room, created placeholder and templates for edit/delete options">
+      <option name="closed" value="true" />
+      <created>1690224285567</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1690224285567</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -254,6 +257,7 @@
     <MESSAGE value="added - tag implementation into &quot;Add new Room&quot;, up to 10 tags per room -&gt; validation of uniqueness, re-rendering&#10;- display tags on the &quot;Rooms Overview&quot; page." />
     <MESSAGE value="added - &quot;My Rooms&quot; overview of rooms created by logged-in user with possibility of redirection to details of selected room" />
     <MESSAGE value="added - makemigrations for Participant's nickname and template's name to be no longer Null/Blank True" />
-    <option name="LAST_COMMIT_MESSAGE" value="added - makemigrations for Participant's nickname and template's name to be no longer Null/Blank True" />
+    <MESSAGE value="added - Room detail extended with possibility to add items for selected room, created placeholder and templates for edit/delete options" />
+    <option name="LAST_COMMIT_MESSAGE" value="added - Room detail extended with possibility to add items for selected room, created placeholder and templates for edit/delete options" />
   </component>
 </project>

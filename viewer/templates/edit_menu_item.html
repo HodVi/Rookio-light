@@ -1,0 +1,21 @@
+{% extends 'room_detail.html' %}
+
+{% block modify %}
+<div class="container mx-auto px-4">
+    <h2 class="text-2xl font-bold mb-4">Edit Item:</h2>
+    <form method="post" class="bg-white p-6 rounded shadow-lg">
+        {% csrf_token %}
+{#        {{ form.as_p }}#}
+        {% for field in form %}
+            <div class="mb-4">
+                <label for="{{ field.id_for_label }}" class="block mb-2">{{ field.label }}</label>
+                <input id="{{ field.id_for_label }}" class="border p-2 w-full {% if field.errors %}border-red-500{% else %}border-gray-200{% endif %}" type="text" name="{{ field.name }}" value="{{ field.value|default:'' }}">
+                {% if field.errors %}
+                    <div class="text-red-500">{{ field.errors }}</div>
+                {% endif %}
+            </div>
+        {% endfor %}
+        <button type="submit" class="bg-blue-500 text-white p-2 rounded">Save Item</button>
+    </form>
+</div>
+{% endblock %}

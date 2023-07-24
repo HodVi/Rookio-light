@@ -27,10 +27,10 @@
                     <p class="mt-2"><span class="font-bold">Number of Pieces:</span> {{ item.number_of_pieces }}</p>
                 </div>
                 <div>
-                    <a href="#" class="mx-2 py-2 text-white rounded bg-orange-500 hover:bg-orange-700 text-center">
+                    <a href="{% url 'edit_menu_item' room.id item.id %}" class="mx-2 py-2 text-white rounded bg-orange-500 hover:bg-orange-700 text-center">
                         <span class="inline-block w-20 text-center">Edit</span>
                     </a>
-                    <a href="#" class="mx-2 py-2 text-white rounded bg-black hover:bg-red-700 text-center">
+                    <a href="{% url 'delete_menu_item' room.id item.id %}" class="mx-2 py-2 text-white rounded bg-slate-950 blink-on-hover text-center">
                         <span class="inline-block w-20 text-center">Delete</span>
                     </a>
                 </div>
