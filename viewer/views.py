@@ -5,13 +5,13 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
 
 from django.shortcuts import render, redirect, get_object_or_404
 
-from viewer.forms import CustomUserCreationForm, RoomForm, TagForm
+from viewer.forms import CustomUserCreationForm, RoomForm, TagForm, MenuItemForm
 
-from viewer.models import Room, PersonOwner, Tag
+from viewer.models import Room, PersonOwner, Tag, MenuItem
 
 
 def register(request):
@@ -112,17 +112,14 @@ def add_room(request):
 def my_rooms(request):
     try:
         person_owner = PersonOwner.objects.get(user_person_owner=request.user)
-        my_rooms_list = Room.objects.filter(owners__permission=PersonOwner.PERMISSION_CHOICES[0][0], owners=person_owner)
+        my_rooms_list = Room.objects.filter(owners__permission=PersonOwner.PERMISSION_CHOICES[0][0],
+                                            owners=person_owner)
+
         return render(request, 'my_rooms.html', {'rooms': my_rooms_list})
     except PersonOwner.DoesNotExist:
         # messages.info(request, f"{request.user.username}, you have not yet created any room.")
+
         return render(request, 'my_rooms.html')
-
-
-@login_required
-def room_detail(request, room_id):
-    room = get_object_or_404(Room, id=room_id)
-    return render(request, 'room_detail.html', {'room': room})
 
 
 def rooms_overview(request):
@@ -132,3 +129,41 @@ def rooms_overview(request):
 
     return render(request, 'rooms_overview.html', {'rooms': rooms})
                                                    # 'number_of_available_places': number_of_available_places})
+
+
+@login_required
+def room_detail(request, room_id):
+    room = get_object_or_404(Room, id=room_id)
+
+    return render(request, 'room_detail.html', {'room': room})
+
+
+@login_required
+def show_items(request, room_id):
+    room = get_object_or_404(Room, id=room_id)
+
+    return render(request, 'show_items.html', {'room': room})
+
+
+@login_required
+def add_item(request, room_id):
+    room = get_object_or_404(Room, pk=room_id)
+    if request.method == 'POST':
+        form = MenuItemForm(request.POST)
+        if form.is_valid():
+            item = form.save(commit=False)
+            item.room = room
+            item.save()
+            return redirect('room_detail', room_id=room_id)
+    else:
+        form = MenuItemForm()
+
+    return render(request, 'add_item.html', {'room': room, 'form': form})
+
+
+@login_required
+def edit_item(request, room_id):
+    room = get_object_or_404(Room, pk=room_id)
+    items = room.menu_items.all()
+
+    return render(request, 'edit_item.html', {'room': room, 'items': items})

@@ -8,7 +8,8 @@ module.exports = {
     extend: {
       animation: {
         'blink': 'blink 1500ms infinite',
-      }
+      },
+      display: ['hover', 'focus']
     },
   },
   plugins: [],

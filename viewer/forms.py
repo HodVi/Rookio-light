@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 from django.core.exceptions import ValidationError
 
-from viewer.models import Room, Tag
+from viewer.models import Room, Tag, MenuItem
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -50,3 +50,36 @@ class TagForm(forms.Form):
         # if Tag.objects.filter(name=name).exists():
         #     raise ValidationError("Tag with this name already exists.")
         return name
+
+
+class MenuItemForm(forms.ModelForm):
+    class Meta:
+        model = MenuItem
+        fields = ['item_name', 'price', 'duration', 'number_of_pieces']
+
+        widgets = {
+            'item_name':
+                forms.TextInput(attrs={'class': 'bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full '
+                                                'py-2 px-4 text-gray-700 leading-tight focus:outline-none '
+                                                'focus:bg-white focus:border-blue-500'
+                                       }
+                                ),
+            'price':
+                forms.NumberInput(attrs={'class': 'bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full '
+                                                  'py-2 px-4 text-gray-700 leading-tight focus:outline-none '
+                                                  'focus:bg-white focus:border-blue-500'
+                                         }
+                                  ),
+            'duration':
+                forms.NumberInput(attrs={'class': 'bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full '
+                                                  'py-2 px-4 text-gray-700 leading-tight focus:outline-none '
+                                                  'focus:bg-white focus:border-blue-500'
+                                         }
+                                  ),
+            'number_of_pieces':
+                forms.NumberInput(attrs={'class': 'bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full '
+                                                  'py-2 px-4 text-gray-700 leading-tight focus:outline-none '
+                                                  'focus:bg-white focus:border-blue-500'
+                                         }
+                                  ),
+        }

@@ -89,8 +89,8 @@ class Room(TimeStamp):
 
 
 class MenuItem(TimeStamp):
-    item_name = models.CharField(max_length=50)
-    price = models.DecimalField(max_digits=7, decimal_places=2)
+    item_name = models.CharField(max_length=50, unique=True)
+    price = models.DecimalField(max_digits=8, decimal_places=2, validators=[MinValueValidator(0)])
     duration = models.PositiveSmallIntegerField(validators=[MinValueValidator(1)], null=True, blank=True)
     number_of_pieces = models.PositiveSmallIntegerField(validators=[MinValueValidator(1)])
     room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name="menu_items")

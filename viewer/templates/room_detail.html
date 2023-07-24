@@ -5,7 +5,7 @@
 
 {% block content %}
 <div class="container mx-auto px-4">
-    <a href="{% url 'my_rooms' %}" class="p-2 bg-blue-500 text-white rounded mb-4 inline-block">Back to My Rooms</a>
+    <a href="{% url 'my_rooms' %}" class="p-2 bg-blue-500 hover:bg-blue-700 text-white rounded mb-4 inline-block">Back to My Rooms</a>
     <div class="border rounded p-4 border-red-900">
         <h3 class="text-xl font-bold">{{ room.name }}</h3>
         <p class="mt-2"><span class="font-bold">Description:</span> {{ room.description }}</p>
@@ -15,5 +15,42 @@
         <p class="mt-2"><span class="font-bold">Time:</span> {{ room.time|time:'H:i' }} {{ room.time|timezone:'Europe/Bratislava' }}</p>
 {#        TODO - decide what to add here#}
     </div>
+
+    <div class="py-2 flex justify-between space-x-40">
+        <div class="group inline-block relative">
+            <a href="{% url 'show_items' room.id %}" class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded inline-flex items-center">
+            <span>Items</span>
+            </a>
+            <div class="absolute left-0 mt-2 py-2 w-auto bg-white rounded-lg shadow-xl border border-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex justify-center items-center">
+                <a href="{% url 'add_item' room.id %}" class="mx-2 w-20 py-2 text-white rounded bg-green-500 hover:bg-green-700 text-center">Add</a>
+                <a href="{% url 'edit_item' room.id %}" class="mx-2 w-20 py-2 text-white rounded bg-orange-500 hover:bg-orange-700 text-center">Edit</a>
+            </div>
+            </div>
+
+            <div class="group inline-block relative">
+                <button class="bg-blue-500 text-white font-semibold py-2 px-4 rounded inline-flex items-center">
+                    <span>Images</span>
+                </button>
+                <div class="absolute left-0 mt-2 py-2 w-auto bg-white rounded-lg shadow-xl border border-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex justify-center items-center">
+                    <a href="#" class="mx-2 w-20 py-2 text-white rounded bg-green-500 hover:bg-green-700 text-center">Add</a>
+                    <a href="#" class="mx-2 w-20 py-2 text-white rounded bg-orange-500 hover:bg-orange-700 text-center">Edit</a>
+                </div>
+            </div>
+
+            <div class="group inline-block relative">
+                <button class="bg-blue-500 text-white font-semibold py-2 px-4 rounded inline-flex items-center">
+                    <span>Permissions</span>
+                </button>
+                <div class="absolute left-0 mt-2 py-2 w-auto bg-white rounded-lg shadow-xl border border-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex justify-center items-center">
+                    <a href="#" class="mx-2 w-20 py-2 text-white rounded bg-green-500 hover:bg-green-700 text-center">Add</a>
+                    <a href="#" class="mx-2 w-20 py-2 text-white rounded bg-orange-500 hover:bg-orange-700 text-center">Edit</a>
+            </div>
+        </div>
+    </div>
 </div>
+
+{% block modify %}
 {% endblock %}
+
+{% endblock %}
+

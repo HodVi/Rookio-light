@@ -34,6 +34,10 @@ urlpatterns = [
 
     path('my_rooms/', views.my_rooms, name='my_rooms'),
     path('room_detail/<int:room_id>/', views.room_detail, name='room_detail'),
+
+    path('room_detail/<int:room_id>/show_items', views.show_items, name='show_items'),
+    path('room_detail/<int:room_id>/add_item', views.add_item, name='add_item'),
+    path('room_detail/<int:room_id>/edit_item', views.edit_item, name='edit_item'),
 ]
 
 # my note - enable Django to serve media files during development

@@ -1,0 +1,44 @@
+{% extends 'room_detail.html' %}
+{% load filters %}
+
+{% block modify %}
+<div class="py-20 container mx-auto px-4">
+    <h2 class="text-2xl font-bold mb-4">Edit Menu Items:</h2>
+    {% if room.menu_items.exists %}
+        <ul>
+            {% for item in room.menu_items.all %}
+            <li class="mb-4 border rounded p-4 border-red-900 flex justify-between">
+                <div>
+                    <h3 class="text-xl font-bold">{{ item.item_name }}</h3>
+                    <p class="mt-2"><span class="font-bold">Price:</span> {{ item.price }} €</p>
+                    {% if item.duration %}
+                    <p class="mt-2"><span class="font-bold">Duration:</span>
+                    {% if item.duration == 1 %}
+                        {{ item.duration }} minute
+                    {% elif item.duration < 61 %}
+                       {{ item.duration }} minutes
+                    {% elif item.duration < 120 %}
+                        {{ item.duration|minutes_to_hours }} hour
+                    {% else %}
+                        {{ item.duration|minutes_to_hours }} hours
+                    {% endif %}
+                    </p>
+                    {% endif %}
+                    <p class="mt-2"><span class="font-bold">Number of Pieces:</span> {{ item.number_of_pieces }}</p>
+                </div>
+                <div>
+                    <a href="#" class="mx-2 py-2 text-white rounded bg-orange-500 hover:bg-orange-700 text-center">
+                        <span class="inline-block w-20 text-center">Edit</span>
+                    </a>
+                    <a href="#" class="mx-2 py-2 text-white rounded bg-black hover:bg-red-700 text-center">
+                        <span class="inline-block w-20 text-center">Delete</span>
+                    </a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="text-red-500">No item has been added for this room yet.</p>
+    {% endif %}
+</div>
+{% endblock %}
