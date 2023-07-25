@@ -12,6 +12,13 @@
             <a href="{% url 'room_detail' room.id %}" class="block hover:bg-gray-200">
                 <h3 class="text-xl font-bold">{{ room.name }}</h3>
 {#                TODO decide what to add here#}
+
+                {% for tag in room.tags.all %}
+                    {{ tag.name }}{% if not forloop.last %} ‧ {% endif %}
+                {% empty %}
+                    No tags.
+                {% endfor %}
+
                 <p class="mt-2"><span class="font-bold">Type:</span> {{ room.get_room_type_display }}</p>
                 <p class="mt-2"><span class="font-bold">Description:</span> {{ room.description }}</p>
                 <p class="mt-2"><span class="font-bold">Place:</span> {{ room.place }}</p>

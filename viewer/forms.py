@@ -1,4 +1,5 @@
 from django import forms
+
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -18,6 +19,11 @@ class CustomUserCreationForm(UserCreationForm):
 
 
 class RoomForm(forms.ModelForm):
+    date = forms.DateField(widget=forms.DateInput(format='%Y-%m-%d'),
+                           input_formats=('%Y-%m-%d',))
+    time = forms.TimeField(widget=forms.TimeInput(format='%H:%M:%S'),
+                           input_formats=('%H:%M',))
+
     class Meta:
         model = Room
         fields = ['name',
@@ -37,6 +43,12 @@ class RoomForm(forms.ModelForm):
                   'minimum_participants',
                   'maximum_participants'
                   ]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if self.instance and self.instance.pk:  # if this is a saved instance
+            self.initial['date'] = self.instance.date.strftime('%Y-%m-%d')
+            self.initial['time'] = self.instance.time.strftime('%H:%M')
 
 
 class TagForm(forms.Form):

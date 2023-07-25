@@ -1,12 +1,11 @@
 {% extends 'base.html' %}
 
-{% block title %}Rookio - Create new Room{% endblock title %}
+{% block title %}Rookio - Edit Room{% endblock title %}
 
 {% block content %}
-<h2 class="mb-4 text-2xl">Add new Room</h2>
+<h2 class="mb-4 text-2xl">Edit Room</h2>
 <form method="post" class="bg-white p-6 rounded shadow-lg">
     {% csrf_token %}
-{#    {{ room_form.as_p }}#}
     {% if room_form.non_field_errors %}
         <div class="mb-4 text-red-500">
             {{ room_form.non_field_errors }}
@@ -102,7 +101,7 @@
         {% endif %}
     </div>
 
-{#    TODO - if Room name or Room description is already filled in, then try to read any number string and put it into date field     #}
+{#    TODO - if Room name or Room description is already filled in, then try to read any number string and put it into date field    |date:'Y-m-d' #}
     <div class="mb-4">
         <label for="{{ room_form.date.id_for_label }}" class="block mb-2">Date(yyyy-mm-dd)</label>
         <input id="{{ room_form.date.id_for_label }}" class="border p-2 w-full" type="text" name="{{ room_form.date.name }}" value="{{ room_form.date.value|default:'' }}">
@@ -175,48 +174,66 @@
         {% endif %}
     </div>
 
-    <button type="submit" class="bg-blue-500 text-white p-2 rounded">Add Room</button>
+    <button type="submit" class="bg-blue-500 text-white p-2 rounded">Save Changes</button>
 </form>
 
-
 <script>
+    const initialTagCount = document.querySelectorAll('.tag-field').length;
     const tagNames = [{% for tag_name in tag_names %}"{{ tag_name }}"{% if not forloop.last %}, {% endif %}{% endfor %}];
     const tagContainer = document.getElementById('tag-container');
     const addTagButton = document.getElementById('add-tag-button');
     const totalTagsInput = document.getElementById('total-tags');
-    let tagCount = document.querySelectorAll('.tag-field').length;
 
-    totalTagsInput.value = tagCount;  // Set initial value
+    totalTagsInput.value = tagNames.length;  // Set initial value
 
-    let totalTagsEverCreated = 1;
+    function createTagField(tagName, index) {
+        const newTagField = document.createElement('div');
+        newTagField.className = 'tag-field';
+        newTagField.innerHTML = `
+            <div class="mb-4">
+                <label for="tag-${index}" class="block mb-2">Tag ${index}</label>
+                <div class="flex">
+                    <input id="tag-${index}" class="border p-2 flex-grow" type="text" name="tag-${index}" value="${tagName}">
+                    <button type="button" class="remove-tag-button ml-2 p-1 bg-red-500 text-white rounded">Remove Tag</button>
+                </div>
+                <div class="tag-errors text-red-500"></div>
+            </div>
+        `;
+        return newTagField;
+    }
+
+    // Create a tag field for each tag name that wasn't rendered by Django
+    tagNames.slice(initialTagCount).forEach((tagName, index) => {
+        const tagField = createTagField(tagName, index + initialTagCount + 1);
+        tagContainer.appendChild(tagField);
+    });
+
+    let tagCount = initialTagCount;
 
     addTagButton.addEventListener('click', function() {
         if (tagCount < 10) {
-            tagCount++;
-            totalTagsEverCreated++;
+            const tagField = createTagField('', tagCount + 1);
+            tagContainer.appendChild(tagField);
+            tagCount += 1;
             totalTagsInput.value = tagCount;  // Update total count
-
-            const newTagField = document.createElement('div');
-            newTagField.className = 'tag-field';
-            newTagField.innerHTML = `
-                <div class="mb-4">
-                    <label for="tag-${totalTagsEverCreated}" class="block mb-2">Tag ${tagCount}</label>
-                    <div class="flex">
-                        <input id="tag-${totalTagsEverCreated}" class="border p-2 flex-grow" type="text" name="tag-${totalTagsEverCreated}" value="${tagNames[tagCount-1] || ''}">
-                        <button type="button" class="remove-tag-button ml-2 p-1 bg-red-500 text-white rounded">Remove Tag</button>
-                    </div>
-                    <div class="tag-errors text-red-500"></div>
-                </div>
-            `;
-            tagContainer.appendChild(newTagField);
         }
     });
 
     tagContainer.addEventListener('click', function(event) {
-        if (event.target.classList.contains('remove-tag-button') && event.target.parentNode.parentNode !== tagContainer.firstElementChild) {
+        if (event.target.classList.contains('remove-tag-button')) {
             event.target.parentNode.parentNode.remove();
-            tagCount--;
+            tagCount -= 1;
             totalTagsInput.value = tagCount;  // Update total count
+
+            // Update tag indices
+            Array.from(tagContainer.children).forEach((tagField, index) => {
+                const label = tagField.querySelector('label');
+                const input = tagField.querySelector('input');
+                label.textContent = `Tag ${index + 1}`;
+                label.htmlFor = `tag-${index + 1}`;
+                input.id = `tag-${index + 1}`;
+                input.name = `tag-${index + 1}`;
+            });
         }
     });
 </script>
