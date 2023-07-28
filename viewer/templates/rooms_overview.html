@@ -4,58 +4,107 @@
 {% block title %}Rookio - Rooms Overview{% endblock title %}
 
 {% block content %}
+<div class="container mx-auto px-4 grid grid-cols-3 gap-4">
+    {% for room in rooms %}
+    <div id="{{ room.id }}" class="room relative rounded-b-lg border-black p-4 shadow-md shadow-black hover:shadow-fuchsia-950">
 
-<div class="container mx-auto px-4">
-    <h2 class="text-2xl font-bold mb-4">Rooms:</h2>
-    <ul>
-        {% for room in rooms %}
-        <li class="mb-4 border rounded p-4 border-red-900">
+{#        Overlay#}
+        <div class="overlay fixed inset-0 bg-black bg-opacity-50 hidden z-10"></div>
+
+{#        Default room information#}
+        <div class="default-info">
             <h3 class="text-xl font-bold">{{ room.name }}</h3>
-
-{#            <p class="mt-2"><span class="font-bold">Tags:</span>#}
+            <p class="mt-2">
                 {% for tag in room.tags.all %}
-                    {{ tag.name }}{% if not forloop.last %} ‧ {% endif %}
+                    {{ tag.name }}{% if not forloop.last %}, {% endif %}
                 {% empty %}
                     No tags.
                 {% endfor %}
-{#            </p>#}
-
-            <h4 class="text-lg mt-2">Owners:</h4>
-            <ul class="list-disc list-inside">
-                {% for owner in room.owners.all %}
-                <li class="mt-1 text-purple-900">
-                    {% if owner.user_person_owner.first_name and owner.user_person_owner.last_name %}
-                        {{ owner.user_person_owner.first_name }} {{ owner.user_person_owner.last_name }}
-                    {% else %}
-                        {{ owner.user_person_owner.username }}
-                    {% endif %}
-                    - {{ owner.get_permission_display }}
-                </li>
-                {% endfor %}
-            </ul>
+            </p>
             <p class="mt-2"><span class="font-bold">Type:</span> {{ room.get_room_type_display }}</p>
-            <p class="mt-2"><span class="font-bold">Description:</span> {{ room.description }}</p>
-            <p class="mt-2"><span class="font-bold">Place:</span> {{ room.place }}</p>
-            <p class="mt-2"><span class="font-bold">GPS place description:</span> {{ room.gps_description }}</p>
-            <p class="mt-2"><span class="font-bold">GPS latitude of place:</span> {{ room.gps_lat }}</p>
-            <p class="mt-2"><span class="font-bold">GPS longitude of place:</span> {{ room.gps_lng }}</p>
-            <p class="mt-2"><span class="font-bold">Date:</span> {{ room.date|date:'d.m.Y' }} </p>
-{#            TODO - fix timezone#}
-            <p class="mt-2"><span class="font-bold">Time:</span> {{ room.time|time:'H:i' }} {{ room.time|timezone:'Europe/Bratislava' }}</p>
-            <p class="mt-2"><span class="font-bold">Contact:</span> {{ room.contact_public }}</p>
-{#            TODO - Additional Contact -> make it visible only for event attendants#}
-            <p class="mt-2"><span class="font-bold">Additional Contact:</span> {{ room.contact_after_assignment }}</p>
-            <p class="mt-2"><span class="font-bold">Age restriction:</span> {{ room.age_restriction }}</p>
-            <p class="mt-2"><span class="font-bold">Age recommendation:</span> {{ room.age_recommendation }}</p>
-            <p class="mt-2"><span class="font-bold">Number of available places:</span> {{ number_of_available_places }}</p>
-{#            TODO - make it visible only if Room type is event#}
-            <p class="mt-2"><span class="font-bold">Minimum number of people to start the event:</span> {{ room.minimum_participants }}</p>
-            <p class="mt-2">Todo :</p>
-        </li>
-        {% empty %}
-        <li class="text-red-500">No rooms available.</li>
-        {% endfor %}
-    </ul>
+            <p class="mt-2"><span class="font-bold">Date:</span> {{ room.date|date:'d.m.Y' }}</p>
+        {#     TODO - fix timezone#}
+            <p class="mt-2"><span class="font-bold">Time:</span> {{ room.time|time:'H:i' }}</p>
+        </div>
+
+        <div class="additional-info-container fixed inset-0 flex items-center justify-center hidden z-20">
+
+{#            Extended room information#}
+            <div class="additional-info relative max-h-screen w-3/5 overflow-auto rounded-xl bg-white p-4">
+
+{#                Join button#}
+                <a href="{% url 'room_detail_with_items' room.id %}" class="join-button absolute right-0 top-1 mr-4 mt-4 animate-bounce rounded-b-full border-b-4 border-r-2 border-black bg-fuchsia-950 px-10 text-2xl text-white shadow-md shadow-black hover:shadow-fuchsia-950">Join</a>
+
+                <h3 class="text-xl font-bold">{{ room.name }}</h3>
+                <p class="mt-2">
+                    {% for tag in room.tags.all %}
+                        {{ tag.name }}{% if not forloop.last %}, {% endif %}
+                    {% empty %}
+                        No tags.
+                    {% endfor %}
+                </p>
+                <p class="mt-2"><span class="font-bold">Type:</span> {{ room.get_room_type_display }}</p>
+                <p class="mt-2"><span class="font-bold">Date:</span> {{ room.date|date:'d.m.Y' }}</p>
+            {#     TODO - fix timezone#}
+                <p class="mt-2"><span class="font-bold">Time:</span> {{ room.time|time:'H:i' }}</p>
+
+                <p class="mt-2"><span class="font-bold">Description:</span> {{ room.description }}</p>
+                <p class="mt-2"><span class="font-bold">Place:</span> {{ room.place }}</p>
+                <p class="mt-2"><span class="font-bold">GPS place description:</span> {{ room.gps_description }}</p>
+                <p class="mt-2"><span class="font-bold">GPS latitude of place:</span> {{ room.gps_lat }}</p>
+                <p class="mt-2"><span class="font-bold">GPS longitude of place:</span> {{ room.gps_lng }}</p>
+                <p class="mt-2"><span class="font-bold">Contact:</span> {{ room.contact_public }}</p>
+    {#            TODO - Additional Contact -> make it visible only for event attendants#}
+                <p class="mt-2"><span class="font-bold">Additional Contact:</span> {{ room.contact_after_assignment }}</p>
+                <p class="mt-2"><span class="font-bold">Age restriction:</span> {{ room.age_restriction }}</p>
+                <p class="mt-2"><span class="font-bold">Age recommendation:</span> {{ room.age_recommendation }}</p>
+                <p class="mt-2"><span class="font-bold">Number of available places:</span> {{ number_of_available_places }}</p>
+    {#            TODO - make it visible only if Room type is event#}
+                <p class="mt-2"><span class="font-bold">Minimum number of people to start the event:</span> {{ room.minimum_participants }}</p>
+
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p class="text-red-500">No rooms available.</p>
+    {% endfor %}
 </div>
+
+<script>
+    // Get all room elements
+    const rooms = document.querySelectorAll('.room');
+
+    rooms.forEach(room => {
+        const overlay = room.querySelector('.overlay');
+        const additionalInfoContainer = room.querySelector('.additional-info-container');
+        const additionalInfo = room.querySelector('.additional-info');
+
+        // Handle room click
+        room.addEventListener('click', event => {
+            // Hide all other additional info containers and overlays
+            rooms.forEach(r => {
+                if (r !== room) {
+                    r.querySelector('.additional-info-container').classList.add('hidden');
+                    r.querySelector('.overlay').classList.add('hidden');
+                }
+            });
+
+            // Toggle this room's additional info container and overlay
+            additionalInfoContainer.classList.toggle('hidden');
+            overlay.classList.toggle('hidden');
+        });
+
+        // Handle overlay click
+        overlay.addEventListener('click', () => {
+            additionalInfoContainer.classList.add('hidden');
+            overlay.classList.add('hidden');
+        });
+
+        // Stop propagation of click events on additional info
+        additionalInfo.addEventListener('click', event => {
+            event.stopPropagation();
+        });
+    });
+</script>
 
 {% endblock %}

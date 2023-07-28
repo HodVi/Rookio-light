@@ -107,7 +107,7 @@ class PersonParticipant(TimeStamp):
                                                         related_name='participant_profile')
     nickname_unregistered_participant = models.CharField(max_length=255, unique=True)
     date_of_birth = models.DateField(blank=True)
-    menu_items = models.ManyToManyField(MenuItem, related_name="participants")
+    menu_items = models.ManyToManyField(MenuItem, through='PersonParticipantMenuItem', related_name="participants")
 
     def __str__(self) -> str:
         return f'Model PersonParticipant - ' \
@@ -121,6 +121,18 @@ class PersonParticipant(TimeStamp):
         if not self.user_person_participant and not self.nickname_unregistered_participant:
             raise ValidationError('Either username or nickname of the participant must be set.')
         super().save(*args, **kwargs)
+
+
+class PersonParticipantMenuItem(models.Model):
+    participant = models.ForeignKey(PersonParticipant, on_delete=models.CASCADE)
+    menu_item = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
+    count = models.PositiveIntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)], default=0)
+
+    class Meta:
+        unique_together = ('participant', 'menu_item')
+
+    def __str__(self) -> str:
+        return f' Model PersonParticipantMenuItem - {self.participant} - {self.menu_item}: {self.count}'
 
 
 LIMIT_MB = 20

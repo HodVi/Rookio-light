@@ -244,3 +244,10 @@ def delete_menu_item(request, room_id, item_id):
         item.delete()
         return redirect('edit_item', room_id=room_id)
     return render(request, 'delete_menu_item.html', {'item': item, 'room': room})
+
+
+def room_detail_with_items(request, room_id):
+    room = get_object_or_404(Room, id=room_id)
+    menu_items = room.menu_items.all()
+
+    return render(request, 'room_overview_detail.html', {'room': room, 'menu_items': menu_items})

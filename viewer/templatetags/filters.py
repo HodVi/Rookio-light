@@ -7,4 +7,4 @@ register = template.Library()
 def minutes_to_hours(value):
     hours = value // 60
     minutes = value % 60
-    return f"{hours:02d}h {minutes:02d}m"
+    return f"{hours:01d}h {minutes:02d}m"

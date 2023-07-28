@@ -18,9 +18,9 @@
                     {% elif item.duration < 61 %}
                        {{ item.duration }} minutes
                     {% elif item.duration < 120 %}
-                        {{ item.duration|minutes_to_hours }} hour
+                        {{ item.duration|minutes_to_hours }}
                     {% else %}
-                        {{ item.duration|minutes_to_hours }} hours
+                        {{ item.duration|minutes_to_hours }}
                     {% endif %}
                     </p>
                     {% endif %}
