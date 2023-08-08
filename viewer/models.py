@@ -105,8 +105,8 @@ class PersonParticipant(TimeStamp):
                                                         on_delete=models.CASCADE,
                                                         null=True, blank=True,
                                                         related_name='participant_profile')
-    nickname_unregistered_participant = models.CharField(max_length=255, unique=True)
-    date_of_birth = models.DateField(blank=True)
+    nickname_unregistered_participant = models.CharField(max_length=255, unique=True, null=True, blank=True)
+    date_of_birth = models.DateField(null=True, blank=True)
     menu_items = models.ManyToManyField(MenuItem, through='PersonParticipantMenuItem', related_name="participants")
 
     def __str__(self) -> str:
@@ -126,7 +126,7 @@ class PersonParticipant(TimeStamp):
 class PersonParticipantMenuItem(models.Model):
     participant = models.ForeignKey(PersonParticipant, on_delete=models.CASCADE)
     menu_item = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
-    count = models.PositiveIntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)], default=0)
+    count = models.PositiveIntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)], null=True)
 
     class Meta:
         unique_together = ('participant', 'menu_item')

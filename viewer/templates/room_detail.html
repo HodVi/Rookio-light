@@ -28,6 +28,10 @@
 {#            TODO - fix timezone#}
         <p class="mt-2"><span class="font-bold">Time:</span> {{ room.time|time:'H:i' }} {{ room.time|timezone:'Europe/Bratislava' }}</p>
 {#        TODO - decide what to add here#}
+        <p class="mt-2"><span class="font-bold">Gps description:</span> {{ room.gps_description }}</p>
+        <p class="mt-2"><span class="font-bold">Gps latitude:</span> {{ room.gps_lat }}</p>
+        <p class="mt-2"><span class="font-bold">Gps longitude:</span> {{ room.gps_lng }}</p>
+        <p class="mt-2"><span class="font-bold">Public contact:</span> {{ room.contact_public }}</p>
     </div>
 
     <div class="py-2 flex justify-between space-x-40">

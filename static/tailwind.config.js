@@ -6,6 +6,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        'custom-color-blue-grey': '#0F172A',
+      },
       animation: {
         'blink': 'blink 1500ms infinite',
       },

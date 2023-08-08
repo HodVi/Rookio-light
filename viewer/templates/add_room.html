@@ -20,7 +20,7 @@
                 <option value="{{ value }}" {% if room_form.room_type.value == value %}selected{% endif %}>{{ display }}</option>
             {% endfor %}
         </select>
-        {% if room_form.room_type.errors %}
+        {% if tag_names.room_type.errors %}
             <div class="text-red-500">{{ room_form.room_type.errors }}</div>
         {% endif %}
     </div>
@@ -29,6 +29,7 @@
         {% for tag_name in tag_names %}
         <div class="tag-field">
             <div class="mb-4">
+
                 <label for="tag-{{ forloop.counter }}" class="block mb-2">Tag {{ forloop.counter }}</label>
                 <div class="flex">
                 <input id="tag-{{ forloop.counter }}" class="border p-2 flex-grow" type="text" name="tag-{{ forloop.counter }}" value="{{ tag_name|default:'' }}">
@@ -36,7 +37,15 @@
                 <button type="button" class="remove-tag-button ml-2 p-1 bg-red-500 text-white rounded">Remove Tag</button>
                 {% endif %}
                 </div>
-                <div class="tag-errors text-red-500"></div>
+                <div class="tag-errors text-red-500">
+                    {% if messages %}
+                    {% for message in messages %}
+                        {% if "Tag" in message.message %}
+                            <div class="text-red-500">{{ message }}</div>
+                        {% endif %}
+                    {% endfor %}
+                    {% endif %}
+                </div>
             </div>
         </div>
         {% endfor %}
@@ -70,14 +79,6 @@
         {% endif %}
     </div>
 
-
-
-
-{#    TODO - place for google maps API#}
-
-
-
-
     <div class="mb-4">
         <label for="{{ room_form.gps_description.id_for_label }}" class="block mb-2">GPS place description</label>
         <input id="{{ room_form.gps_description.id_for_label }}" class="border p-2 w-full" type="text" name="{{ room_form.gps_description.name }}" value="{{ room_form.gps_description.value|default:'' }}">
@@ -101,6 +102,10 @@
             <div class="text-red-500">{{ room_form.gps_lng.errors }}</div>
         {% endif %}
     </div>
+
+{#    TODO - place for google maps API#}
+
+
 
 {#    TODO - if Room name or Room description is already filled in, then try to read any number string and put it into date field     #}
     <div class="mb-4">

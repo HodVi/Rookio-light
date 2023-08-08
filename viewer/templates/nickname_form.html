@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mx-auto px-4">
+    <h2 class="text-2xl font-bold">Enter your Nickname</h2>
+    <form method="POST" action="{% url 'check_nickname' %}">
+        {% csrf_token %}
+        <div class="mt-4">
+            <input type="text" name="nickname" class="rounded-lg border-2 border-black p-4 shadow-lg" placeholder="Nickname">
+        </div>
+        <div class="mt-4">
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Check</button>
+        </div>
+
+    </form>
+</div>
+{% endblock %}

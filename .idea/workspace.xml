@@ -4,19 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="34bf23ce-0f23-4c8a-a234-516d2d35d0cf" name="Changes" comment="added - Room detail - edit data of room(Room's model fields)">
-      <change afterPath="$PROJECT_DIR$/viewer/migrations/0005_add_intermediate_without_through_par.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/viewer/migrations/0006_add_through.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/viewer/migrations/0007_validators_pers_par_menu_item.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/viewer/templates/room_overview_detail.html" afterDir="false" />
+    <list default="true" id="34bf23ce-0f23-4c8a-a234-516d2d35d0cf" name="Changes" comment="added - Rooms Overview - design,&#10;models.py - custom intermediate table for PersonParticipantMenuItem">
+      <change afterPath="$PROJECT_DIR$/viewer/migrations/0008_pers_part_dateof_birth.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/viewer/migrations/0009_pers_part_count.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/viewer/migrations/0010_pers_part_nickname_args.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/viewer/templates/my_items.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/viewer/templates/nickname_form.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Rookio/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Rookio/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/output.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/output.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/tailwind.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/tailwind.config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/viewer/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/viewer/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/viewer/templates/edit_item.html" beforeDir="false" afterPath="$PROJECT_DIR$/viewer/templates/edit_item.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/viewer/templates/add_room.html" beforeDir="false" afterPath="$PROJECT_DIR$/viewer/templates/add_room.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/viewer/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/viewer/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/viewer/templates/registration/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/viewer/templates/registration/login.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/viewer/templates/registration/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/viewer/templates/registration/register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/viewer/templates/rooms_overview.html" beforeDir="false" afterPath="$PROJECT_DIR$/viewer/templates/rooms_overview.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/viewer/templates/room_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/viewer/templates/room_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/viewer/templates/room_overview_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/viewer/templates/room_overview_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/viewer/templates/welcome.html" beforeDir="false" afterPath="$PROJECT_DIR$/viewer/templates/welcome.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/viewer/templatetags/filters.py" beforeDir="false" afterPath="$PROJECT_DIR$/viewer/templatetags/filters.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/viewer/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/viewer/views.py" afterDir="false" />
     </list>
@@ -150,7 +156,14 @@
       <workItem from="1690354990638" duration="22406000" />
       <workItem from="1690400969915" duration="2106000" />
       <workItem from="1690467029155" duration="25751000" />
-      <workItem from="1690520863739" duration="557000" />
+      <workItem from="1690520863739" duration="44551000" />
+      <workItem from="1690731566778" duration="1209000" />
+      <workItem from="1691084471149" duration="1237000" />
+      <workItem from="1691176928572" duration="1608000" />
+      <workItem from="1691224039377" duration="857000" />
+      <workItem from="1691248391502" duration="1543000" />
+      <workItem from="1691330736430" duration="653000" />
+      <workItem from="1691431129539" duration="8677000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1687198242751</created>
@@ -253,7 +266,15 @@
       <option name="project" value="LOCAL" />
       <updated>1690318346092</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="added - Rooms Overview - design,&#10;models.py - custom intermediate table for PersonParticipantMenuItem">
+      <option name="closed" value="true" />
+      <created>1690521611571</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1690521611571</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -285,7 +306,8 @@
     <MESSAGE value="added - Room detail extended with possibility to add items for selected room, created placeholder and templates for edit/delete options" />
     <MESSAGE value="added - Room detail extended with possibility to edit/delete items for selected room" />
     <MESSAGE value="added - Room detail - edit data of room(Room's model fields)" />
-    <option name="LAST_COMMIT_MESSAGE" value="added - Room detail - edit data of room(Room's model fields)" />
+    <MESSAGE value="added - Rooms Overview - design,&#10;models.py - custom intermediate table for PersonParticipantMenuItem" />
+    <option name="LAST_COMMIT_MESSAGE" value="added - Rooms Overview - design,&#10;models.py - custom intermediate table for PersonParticipantMenuItem" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/SDA_Final_Project$views.coverage" NAME="views Coverage Results" MODIFIED="1690319026086" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/viewer" />

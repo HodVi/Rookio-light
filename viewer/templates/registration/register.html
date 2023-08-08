@@ -1,50 +1,54 @@
 {% extends 'base.html' %}
 
-{% block title %}Register{% endblock title %}
+{% block title %}Rookio - Registration{% endblock title %}
 
 {% block content %}
-<h2>Register</h2>
-<form method="post">
-    {% csrf_token %}
-{#    {{ form.as_p }}#}
-{#    usage of combo label-input-div instead of form.as_p is bc of more css flexibility #}
-{#    pattern is used for hold already filled in values to form -> value="{{ form.username.value|default_if_none:'' }}"#}
-    <div class="mb-4">
-        <label class="block" for="id_username">Username:</label>
-        <input class="border border-gray-200 rounded p-2" id="id_username" type="text" name="username" required value="{{ form.username.value|default_if_none:'' }}">
-        <div class="text-red-500 text-xs mt-2">{{ form.username.errors }}</div>
-    </div>
 
-    <div class="mb-4">
-        <label class="block" for="id_first_name">First Name:</label>
-        <input class="border border-gray-200 rounded p-2" id="id_first_name" type="text" name="first_name" required value="{{ form.first_name.value|default_if_none:'' }}">
-        <div class="text-red-500 text-xs mt-2">{{ form.first_name.errors }}</div>
-    </div>
+<div class="flex items-center justify-center h-screen bg-custom-color-blue-grey">
+    <form method="post" class="bg-white p-6 rounded-lg shadow-lg w-96">
+        {% csrf_token %}
+        <h2 class="text-2xl font-bold mb-4 text-center">Registration</h2>
+    {#    {{ form.as_p }}#}
+    {#    usage of combo label-input-div instead of form.as_p is bc of more css flexibility #}
+    {#    pattern is used for hold already filled in values to form -> value="{{ form.username.value|default_if_none:'' }}"#}
+        <div class="mb-4">
+            <label class="block text-sm font-bold mb-2" for="id_username">Username:</label>
+            <input class="border border-gray-200 rounded p-2 w-full" id="id_username" type="text" name="username" required value="{{ form.username.value|default_if_none:'' }}">
+            <div class="text-red-500 text-xs mt-2">{{ form.username.errors }}</div>
+        </div>
 
-    <div class="mb-4">
-        <label class="block" for="id_last_name">Last Name:</label>
-        <input class="border border-gray-200 rounded p-2" id="id_last_name" type="text" name="last_name" required value="{{ form.last_name.value|default_if_none:'' }}">
-        <div class="text-red-500 text-xs mt-2">{{ form.last_name.errors }}</div>
-    </div>
+        <div class="mb-4">
+            <label class="block text-sm font-bold mb-2" for="id_first_name">First Name:</label>
+            <input class="border border-gray-200 rounded p-2 w-full" id="id_first_name" type="text" name="first_name" required value="{{ form.first_name.value|default_if_none:'' }}">
+            <div class="text-red-500 text-xs mt-2">{{ form.first_name.errors }}</div>
+        </div>
 
-    <div class="mb-4">
-        <label class="block" for="id_email">Email:</label>
-        <input class="border border-gray-200 rounded p-2" id="id_email" type="email" name="email" required value="{{ form.email.value|default_if_none:'' }}">
-        <div class="text-red-500 text-xs mt-2">{{ form.email.errors }}</div>
-    </div>
+        <div class="mb-4">
+            <label class="block text-sm font-bold mb-2" for="id_last_name">Last Name:</label>
+            <input class="border border-gray-200 rounded p-2 w-full" id="id_last_name" type="text" name="last_name" required value="{{ form.last_name.value|default_if_none:'' }}">
+            <div class="text-red-500 text-xs mt-2">{{ form.last_name.errors }}</div>
+        </div>
 
-    <div class="mb-4">
-        <label class="block" for="id_password1">Password:</label>
-        <input class="border border-gray-200 rounded p-2" id="id_password1" type="password" name="password1" required>
-        <div class="text-red-500 text-xs mt-2">{{ form.password1.errors }}</div>
-    </div>
+        <div class="mb-4">
+            <label class="block text-sm font-bold mb-2" for="id_email">Email:</label>
+            <input class="border border-gray-200 rounded p-2 w-full" id="id_email" type="email" name="email" required value="{{ form.email.value|default_if_none:'' }}">
+            <div class="text-red-500 text-xs mt-2">{{ form.email.errors }}</div>
+        </div>
 
-    <div class="mb-4">
-        <label class="block" for="id_password2">Confirm Password:</label>
-        <input class="border border-gray-200 rounded p-2" id="id_password2" type="password" name="password2" required>
-        <div class="text-red-500 text-xs mt-2">{{ form.password2.errors }}</div>
-    </div>
+        <div class="mb-4">
+            <label class="block text-sm font-bold mb-2" for="id_password1">Password:</label>
+            <input class="border border-gray-200 rounded p-2 w-full" id="id_password1" type="password" name="password1" required>
+            <div class="text-red-500 text-xs mt-2">{{ form.password1.errors }}</div>
+        </div>
 
-    <button type="submit">Register button</button>
-</form>
+        <div class="mb-4">
+            <label class="block text-sm font-bold mb-2" for="id_password2">Confirm Password:</label>
+            <input class="border border-gray-200 rounded p-2 w-full" id="id_password2" type="password" name="password2" required>
+            <div class="text-red-500 text-xs mt-2">{{ form.password2.errors }}</div>
+        </div>
+        <div class="flex items-center justify-center mt-6">
+            <button type="submit" class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800">Register</button>
+        </div>
+    </form>
+</div>
 {% endblock %}

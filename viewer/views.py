@@ -11,7 +11,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 
 from viewer.forms import CustomUserCreationForm, RoomForm, TagForm, MenuItemForm
 
-from viewer.models import Room, PersonOwner, Tag, MenuItem
+from viewer.models import Room, PersonOwner, Tag, MenuItem, PersonParticipant, PersonParticipantMenuItem
 
 
 def register(request):
@@ -250,4 +250,91 @@ def room_detail_with_items(request, room_id):
     room = get_object_or_404(Room, id=room_id)
     menu_items = room.menu_items.all()
 
+    if request.method == 'POST':
+        nickname = request.POST.get('nickname')
+        if request.user.is_authenticated:
+            participant, created = PersonParticipant.objects.get_or_create(
+                user_person_participant=request.user,
+                defaults={'nickname_unregistered_participant': nickname if nickname else None}
+            )
+        else:
+            if not nickname:
+                messages.error(request, "Nickname is required for unregistered users.")
+                return render(request, 'room_overview_detail.html', {'room': room, 'menu_items': menu_items})
+
+            participant, created = PersonParticipant.objects.get_or_create(nickname_unregistered_participant=nickname)
+
+        for item in menu_items:
+            quantity = request.POST.get(f'quantity-{item.id}')
+            if quantity:
+                try:
+                    quantity = int(quantity)
+                    if quantity < 0 or quantity >= item.number_of_pieces or quantity > 5:
+                    # if quantity < 0 or quantity > item.number_of_pieces:
+                        raise ValueError
+                except ValueError:
+                    messages.error(request, f"Invalid quantity for item {item.item_name}. Maximum is 5!")
+                    return render(request, 'room_overview_detail.html', {'room': room, 'menu_items': menu_items})
+
+                participant_menu_item, created = PersonParticipantMenuItem.objects.get_or_create(
+                    participant=participant,
+                    menu_item=item,
+                    defaults={'count': quantity}
+                )
+
+                if not created:
+                    participant_menu_item.count = quantity
+                    participant_menu_item.save()
+
+                # Subtract the ordered quantity from the number of pieces of the menu item
+                # Check if the remaining number of pieces would not go below zero
+                if item.number_of_pieces - quantity < 1:
+                # if item.number_of_pieces - quantity < 0:
+                    messages.error(request, f"Not enough {item.item_name} left.")
+                    return render(request, 'room_overview_detail.html', {'room': room, 'menu_items': menu_items})
+
+                item.number_of_pieces -= quantity
+                item.save()
+
+        messages.success(request, "Item(s) successfully added to your list.")
+        return redirect('room_detail_with_items', room_id=room.id)
+
     return render(request, 'room_overview_detail.html', {'room': room, 'menu_items': menu_items})
+
+
+def get_rooms_and_items(participant):
+    room_items = []
+    rooms = Room.objects.filter(menu_items__participants=participant).distinct()
+    for room in rooms:
+        items = MenuItem.objects.filter(room=room, participants=participant,
+                                        personparticipantmenuitem__count__gt=0)
+        items_with_count = [(item, item.personparticipantmenuitem_set.get(participant=participant).count)
+                            for item
+                            in items]
+        room_items.append((room, items_with_count))
+    return room_items
+
+
+def my_items_view(request):
+    if request.user.is_authenticated:
+        try:
+            participant = PersonParticipant.objects.get(user_person_participant=request.user)
+            room_items = get_rooms_and_items(participant)
+            has_items = True
+        except PersonParticipant.DoesNotExist:
+            room_items = []
+            has_items = False
+    else:
+        return render(request, 'nickname_form.html')
+    return render(request, 'my_items.html', {'room_items': room_items, 'has_items': has_items})
+
+
+def check_nickname_view(request):
+    nickname = request.POST.get('nickname')
+    try:
+        participant = PersonParticipant.objects.get(nickname_unregistered_participant=nickname)
+    except PersonParticipant.DoesNotExist:
+        messages.error(request, 'Enter correct Nickname')
+        return render(request, 'nickname_form.html')
+    room_items = get_rooms_and_items(participant)
+    return render(request, 'my_items.html', {'room_items': room_items})

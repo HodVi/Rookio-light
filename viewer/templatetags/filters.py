@@ -5,6 +5,14 @@ register = template.Library()
 
 @register.filter
 def minutes_to_hours(value):
-    hours = value // 60
-    minutes = value % 60
-    return f"{hours:01d}h {minutes:02d}m"
+    if value:
+        hours = int(value) // 60
+        minutes = int(value) % 60
+        return f"{hours:01d}h {minutes:02d}m"
+    else:
+        return f""
+
+
+@register.filter
+def to_int(value):
+    return int(value)

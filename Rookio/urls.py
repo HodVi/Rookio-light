@@ -32,6 +32,9 @@ urlpatterns = [
     path('add_room/', views.add_room, name='add_room'),
     path('rooms_overview/', views.rooms_overview, name='rooms_overview'),
 
+    path('my_items/', views.my_items_view, name='my_items'),
+    path('check_nickname/', views.check_nickname_view, name='check_nickname'),
+
     path('my_rooms/', views.my_rooms, name='my_rooms'),
     path('my_rooms/<int:room_id>/edit_room', views.edit_room, name='edit_room'),
     path('room_detail/<int:room_id>/', views.room_detail, name='room_detail'),
