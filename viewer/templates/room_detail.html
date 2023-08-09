@@ -23,15 +23,23 @@
         {% endfor %}
 
         <p class="mt-2"><span class="font-bold">Description:</span> {{ room.description }}</p>
-        <p class="mt-2"><span class="font-bold">Place:</span> {{ room.place }}</p>
-        <p class="mt-2"><span class="font-bold">Date:</span> {{ room.date|date:'d.m.Y' }} </p>
-{#            TODO - fix timezone#}
-        <p class="mt-2"><span class="font-bold">Time:</span> {{ room.time|time:'H:i' }} {{ room.time|timezone:'Europe/Bratislava' }}</p>
-{#        TODO - decide what to add here#}
-        <p class="mt-2"><span class="font-bold">Gps description:</span> {{ room.gps_description }}</p>
-        <p class="mt-2"><span class="font-bold">Gps latitude:</span> {{ room.gps_lat }}</p>
-        <p class="mt-2"><span class="font-bold">Gps longitude:</span> {{ room.gps_lng }}</p>
-        <p class="mt-2"><span class="font-bold">Public contact:</span> {{ room.contact_public }}</p>
+        <div class="flex space-x-4">
+            <div class="flex-1">
+                <p class="mt-2"><span class="font-bold">Place:</span> {{ room.place }}</p>
+                <p class="mt-2"><span class="font-bold">Date:</span> {{ room.date|date:'d.m.Y' }} </p>
+        {#            TODO - fix timezone#}
+                <p class="mt-2"><span class="font-bold">Time:</span> {{ room.time|time:'H:i' }} {{ room.time|timezone:'Europe/Bratislava' }}</p>
+        {#        TODO - decide what to add here#}
+                <p class="mt-2"><span class="font-bold">Gps description:</span> {{ room.gps_description }}</p>
+                <p class="mt-2"><span class="font-bold">Gps latitude:</span> {{ room.gps_lat }}</p>
+                <p class="mt-2"><span class="font-bold">Gps longitude:</span> {{ room.gps_lng }}</p>
+                <p class="mt-2"><span class="font-bold">Public contact:</span> {{ room.contact_public }}</p>
+            </div>
+
+            <div class="flex-1">
+                <div id="detailGoogleMap" class="h-96 w-full border rounded"></div>
+            </div>
+        </div>
     </div>
 
     <div class="py-2 flex justify-between space-x-40">
@@ -70,6 +78,31 @@
         </div>
     </div>
 </div>
+
+<script src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}"></script>
+
+<script>
+    function initDetailMap() {
+        const roomLocation = {
+            lat: {{ room.gps_lat }},
+            lng: {{ room.gps_lng }}
+        };
+
+        const map = new google.maps.Map(document.getElementById('detailGoogleMap'), {
+            center: roomLocation,
+            zoom: 15
+        });
+
+        new google.maps.Marker({
+            position: roomLocation,
+            map: map,
+            title: "{{ room.gps_description }}"
+        });
+    }
+
+    // Call the function to initialize the map
+    initDetailMap();
+</script>
 
 {% block modify %}
 {% endblock %}

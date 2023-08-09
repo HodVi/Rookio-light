@@ -6,7 +6,7 @@
 {% block content %}
 <div class="container mx-auto px-4 grid grid-cols-3 gap-4">
     {% for room in rooms %}
-    <div id="{{ room.id }}" class="room relative rounded-b-lg border-black p-4 shadow-md shadow-black hover:shadow-fuchsia-950">
+    <div class="room relative rounded-b-lg border-black p-4 shadow-md shadow-black hover:shadow-fuchsia-950">
 
 {#        Overlay#}
         <div class="overlay fixed inset-0 bg-black bg-opacity-50 hidden z-10"></div>
@@ -49,19 +49,27 @@
                 <p class="mt-2"><span class="font-bold">Time:</span> {{ room.time|time:'H:i' }}</p>
 
                 <p class="mt-2"><span class="font-bold">Description:</span> {{ room.description }}</p>
-                <p class="mt-2"><span class="font-bold">Place:</span> {{ room.place }}</p>
-                <p class="mt-2"><span class="font-bold">GPS place description:</span> {{ room.gps_description }}</p>
-                <p class="mt-2"><span class="font-bold">GPS latitude of place:</span> {{ room.gps_lat }}</p>
-                <p class="mt-2"><span class="font-bold">GPS longitude of place:</span> {{ room.gps_lng }}</p>
-                <p class="mt-2"><span class="font-bold">Contact:</span> {{ room.contact_public }}</p>
-    {#            TODO - Additional Contact -> make it visible only for event attendants#}
-                <p class="mt-2"><span class="font-bold">Additional Contact:</span> {{ room.contact_after_assignment }}</p>
-                <p class="mt-2"><span class="font-bold">Age restriction:</span> {{ room.age_restriction }}</p>
-                <p class="mt-2"><span class="font-bold">Age recommendation:</span> {{ room.age_recommendation }}</p>
-                <p class="mt-2"><span class="font-bold">Number of available places:</span> {{ number_of_available_places }}</p>
-    {#            TODO - make it visible only if Room type is event#}
-                <p class="mt-2"><span class="font-bold">Minimum number of people to start the event:</span> {{ room.minimum_participants }}</p>
 
+                <div class="flex mb-4">
+                    <div class="flex-1 pr-4">
+                        <p class="mt-2"><span class="font-bold">Place:</span> {{ room.place }}</p>
+                        <p class="mt-2"><span class="font-bold">GPS place description:</span> {{ room.gps_description }}</p>
+                        <p class="mt-2"><span class="font-bold">GPS latitude of place:</span> {{ room.gps_lat }}</p>
+                        <p class="mt-2"><span class="font-bold">GPS longitude of place:</span> {{ room.gps_lng }}</p>
+                        <p class="mt-2"><span class="font-bold">Contact:</span> {{ room.contact_public }}</p>
+            {#            TODO - Additional Contact -> make it visible only for event attendants#}
+                        <p class="mt-2"><span class="font-bold">Additional Contact:</span> {{ room.contact_after_assignment }}</p>
+                        <p class="mt-2"><span class="font-bold">Age restriction:</span> {{ room.age_restriction }}</p>
+                        <p class="mt-2"><span class="font-bold">Age recommendation:</span> {{ room.age_recommendation }}</p>
+                        <p class="mt-2"><span class="font-bold">Number of available places:</span> {{ number_of_available_places }}</p>
+            {#            TODO - make it visible only if Room type is event#}
+                        <p class="mt-2"><span class="font-bold">Minimum number of people to start the event:</span> {{ room.minimum_participants }}</p>
+                    </div>
+
+                    <div class="flex-1">
+                        <div id="overviewGoogleMap_{{ room.id }}" class="h-96 w-full border rounded"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -69,6 +77,8 @@
     <p class="text-red-500">No rooms available.</p>
     {% endfor %}
 </div>
+
+<script src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}&libraries=places"></script>
 
 <script>
     // Get all room elements
@@ -105,6 +115,32 @@
             event.stopPropagation();
         });
     });
+
+
+    const roomsData = {{ serialized_rooms|safe }};
+
+    function initOverviewMap(room, index) {
+        const roomLocation = {
+            lat: parseFloat(room.fields.gps_lat),
+            lng: parseFloat(room.fields.gps_lng)
+        };
+
+        const map = new google.maps.Map(document.getElementById('overviewGoogleMap_' + room.pk), {
+            center: roomLocation,
+            zoom: 15
+        });
+
+        new google.maps.Marker({
+            position: roomLocation,
+            map: map,
+            title: room.fields.gps_description
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        roomsData.forEach(initOverviewMap);
+    })
+
 </script>
 
 {% endblock %}

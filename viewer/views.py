@@ -7,6 +7,8 @@ from django.contrib.auth import authenticate, login as auth_login, logout as aut
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 
+from django.core.serializers import serialize
+
 from django.shortcuts import render, redirect, get_object_or_404
 
 from viewer.forms import CustomUserCreationForm, RoomForm, TagForm, MenuItemForm
@@ -126,6 +128,11 @@ def my_rooms(request):
 def edit_room(request, room_id):
     room = get_object_or_404(Room, id=room_id)
 
+    # Extract GPS data for the room being edited.
+    gps_lat = room.gps_lat if room.gps_lat else 49.255277  # Default latitude
+    gps_lng = room.gps_lng if room.gps_lng else 21.786310  # Default longitude
+    gps_description = room.gps_description if room.gps_description else ""
+
     if request.method == 'POST':
         room_form = RoomForm(request.POST, instance=room)
 
@@ -171,7 +178,13 @@ def edit_room(request, room_id):
         room_form = RoomForm(instance=room)
         tag_names = [tag.name for tag in room.tags.all()]
 
-    return render(request, 'edit_room.html', {'room_form': room_form, 'tag_names': tag_names})
+    return render(request, 'edit_room.html', {
+        'room_form': room_form,
+        'tag_names': tag_names,
+        'gps_lat': gps_lat,
+        'gps_lng': gps_lng,
+        'gps_description': gps_description,
+    })
 
 
 def rooms_overview(request):
@@ -179,7 +192,9 @@ def rooms_overview(request):
     # TODO - make a calculations according to the number of registered participants
     # number_of_available_places = None
 
-    return render(request, 'rooms_overview.html', {'rooms': rooms})
+    serialized_rooms = serialize('json', rooms)
+
+    return render(request, 'rooms_overview.html', {'rooms': rooms, 'serialized_rooms': serialized_rooms})
                                                    # 'number_of_available_places': number_of_available_places})
 
 
@@ -321,12 +336,31 @@ def my_items_view(request):
             participant = PersonParticipant.objects.get(user_person_participant=request.user)
             room_items = get_rooms_and_items(participant)
             has_items = True
+
+            # # Serialize each room
+            # serialized_rooms = [serialize('json', [room]) for room, _ in room_items]
         except PersonParticipant.DoesNotExist:
             room_items = []
+            # serialized_rooms = []
             has_items = False
     else:
         return render(request, 'nickname_form.html')
-    return render(request, 'my_items.html', {'room_items': room_items, 'has_items': has_items})
+
+    # Extract necessary attributes from all rooms
+    room_data_list = [
+        {
+            'gps_lat': room.gps_lat,
+            'gps_lng': room.gps_lng,
+            'gps_description': room.gps_description
+        }
+        for room, _ in room_items
+    ]
+
+    return render(request, 'my_items.html', {
+        'room_items': room_items,
+        'room_data_list': room_data_list,
+        'has_items': has_items,
+    })
 
 
 def check_nickname_view(request):

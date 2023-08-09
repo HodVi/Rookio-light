@@ -24,7 +24,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # my note - SECRET_KEY is stored in .env file - .env is already included in .gitignore
-SECRET_KEY = config('DJANGO_ROOKIO_SECRET_KEY', default='put-here-a-correct-key')
+SECRET_KEY = config('DJANGO_ROOKIO_SECRET_KEY')
+
+# my note - GOOGLE_MAPS_API_KEY is stored in .env file - .env is already included in .gitignore
+GOOGLE_MAPS_API_KEY = config('GOOGLE_MAPS_API_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -71,6 +74,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # my note - this server to make it available to templates without explicitly passing it in every view
+                'viewer.context_processors.google_maps_api_key',
             ],
         },
     },
@@ -86,6 +91,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+        'TEST': {
+            'NAME': BASE_DIR / "test_db.sqlite3",
+        },
     }
 }
 

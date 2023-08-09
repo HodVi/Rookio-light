@@ -79,33 +79,37 @@
         {% endif %}
     </div>
 
-    <div class="mb-4">
-        <label for="{{ room_form.gps_description.id_for_label }}" class="block mb-2">GPS place description</label>
-        <input id="{{ room_form.gps_description.id_for_label }}" class="border p-2 w-full" type="text" name="{{ room_form.gps_description.name }}" value="{{ room_form.gps_description.value|default:'' }}">
-        {% if room_form.gps_description.errors %}
-            <div class="text-red-500">{{ room_form.gps_description.errors }}</div>
-        {% endif %}
+    <div class="flex mb-4">
+        <div class="flex-1 flex flex-col justify-between pr-4 h-96">
+            <div class="mb-4">
+                <label for="{{ room_form.gps_description.id_for_label }}" class="block mb-2">GPS place description</label>
+                <input id="{{ room_form.gps_description.id_for_label }}" class="border p-2 w-full" type="text" name="{{ room_form.gps_description.name }}" value="{{ room_form.gps_description.value|default:'' }}">
+                {% if room_form.gps_description.errors %}
+                    <div class="text-red-500">{{ room_form.gps_description.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div class="mb-4">
+                <label for="{{ room_form.gps_lat.id_for_label }}" class="block mb-2">GPS latitude of place</label>
+                <input id="{{ room_form.gps_lat.id_for_label }}" class="border p-2 w-full" type="text" name="{{ room_form.gps_lat.name }}" value="{{ room_form.gps_lat.value|default:'' }}">
+                {% if room_form.gps_lat.errors %}
+                    <div class="text-red-500">{{ room_form.gps_lat.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div class="mb-4">
+                <label for="{{ room_form.gps_lng.id_for_label }}" class="block mb-2">GPS longitude of place</label>
+                <input id="{{ room_form.gps_lng.id_for_label }}" class="border p-2 w-full" type="text" name="{{ room_form.gps_lng.name }}" value="{{ room_form.gps_lng.value|default:'' }}">
+                {% if room_form.gps_lng.errors %}
+                    <div class="text-red-500">{{ room_form.gps_lng.errors }}</div>
+                {% endif %}
+            </div>
+        </div>
+        {#    TODO - place for google maps API#}
+        <div class="flex-1">
+            <div id="googleMap" class="h-96 w-full border rounded"></div>
+        </div>
     </div>
-
-    <div class="mb-4">
-        <label for="{{ room_form.gps_lat.id_for_label }}" class="block mb-2">GPS latitude of place</label>
-        <input id="{{ room_form.gps_lat.id_for_label }}" class="border p-2 w-full" type="text" name="{{ room_form.gps_lat.name }}" value="{{ room_form.gps_lat.value|default:'' }}">
-        {% if room_form.gps_lat.errors %}
-            <div class="text-red-500">{{ room_form.gps_lat.errors }}</div>
-        {% endif %}
-    </div>
-
-    <div class="mb-4">
-        <label for="{{ room_form.gps_lng.id_for_label }}" class="block mb-2">GPS longitude of place</label>
-        <input id="{{ room_form.gps_lng.id_for_label }}" class="border p-2 w-full" type="text" name="{{ room_form.gps_lng.name }}" value="{{ room_form.gps_lng.value|default:'' }}">
-        {% if room_form.gps_lng.errors %}
-            <div class="text-red-500">{{ room_form.gps_lng.errors }}</div>
-        {% endif %}
-    </div>
-
-{#    TODO - place for google maps API#}
-
-
 
 {#    TODO - if Room name or Room description is already filled in, then try to read any number string and put it into date field     #}
     <div class="mb-4">
@@ -183,6 +187,7 @@
     <button type="submit" class="bg-blue-500 text-white p-2 rounded">Add Room</button>
 </form>
 
+<script src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}&libraries=places&callback=initMap" async defer></script>
 
 <script>
     const tagNames = [{% for tag_name in tag_names %}"{{ tag_name }}"{% if not forloop.last %}, {% endif %}{% endfor %}];
@@ -224,6 +229,39 @@
             totalTagsInput.value = tagCount;  // Update total count
         }
     });
+
+    let map;
+    function initMap() {
+        // Default coordinates
+        const defaultLocation = {lat: 49.255277, lng: 21.786310};
+
+        map = new google.maps.Map(document.getElementById('googleMap'), {
+            center: defaultLocation,
+            zoom: 13
+        });
+
+        google.maps.event.addListener(map, 'click', function(event) {
+            const latitude = event.latLng.lat();
+            const longitude = event.latLng.lng();
+
+            // Update form fields
+            document.getElementById('{{ room_form.gps_lat.id_for_label }}').value = latitude.toFixed(6);
+            document.getElementById('{{ room_form.gps_lng.id_for_label }}').value = longitude.toFixed(6);
+
+            // Fetching place name using Reverse Geocoding
+            const geocoder = new google.maps.Geocoder();
+            geocoder.geocode({'location': event.latLng}, function(results, status) {
+                if (status === 'OK' && results[0]) {
+                    document.getElementById('{{ room_form.gps_description.id_for_label }}').value = results[0].formatted_address;
+                } else {
+                    console.error('No results found for the clicked location.');
+                }
+            });
+        });
+    }
+
+    {#// Call the function to initialize the map#}
+    {#initMap();#}
 </script>
 
 {% endblock %}

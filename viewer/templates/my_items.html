@@ -13,12 +13,18 @@
 {#    {% else %}#}
     {% endif %}
     {% endif %}
+
     {% for room, items_with_count in room_items %}
     <div class="p-4 mt-4 bg-white rounded shadow-xl">
         <h3 class="text-lg font-bold">{{ room.name }}</h3>
         <p><span class="font-bold">Type:</span> {{ room.room_type }}</p>
         <p><span class="font-bold">Date:</span> {{ room.date|date:'d.m.Y' }}</p>
         <p><span class="font-bold">Description:</span> {{ room.description }}</p>
+
+        <div class="mt-4">
+            <div id="itemsGoogleMap-{{ forloop.counter }}" class="h-96 w-full border rounded"></div>
+        </div>
+
         <div class="grid grid-cols-2 gap-4 mt-4">
             {% for item, count in items_with_count %}
             <div class="relative rounded-lg border-2 border-black p-4 shadow-lg">
@@ -43,4 +49,33 @@
     {% endfor %}
 {#    {% endif %}#}
 </div>
+
+<script src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}"></script>
+
+{% for room_data in room_data_list %}
+<script>
+   function initItemMap{{ forloop.counter }}() {
+        const roomLocation = {
+            lat: {{ room_data.gps_lat }},
+            lng: {{ room_data.gps_lng }}
+        };
+
+        const map = new google.maps.Map(document.getElementById('itemsGoogleMap-{{ forloop.counter }}'), {
+            center: roomLocation,
+            zoom: 15
+        });
+
+        new google.maps.Marker({
+            position: roomLocation,
+            map: map,
+            title: "{{ room_data.gps_description }}"
+        });
+    }
+
+    // Call the function to initialize the map for this room
+    initItemMap{{ forloop.counter }}();
+</script>
+
+{% endfor %}
+
 {% endblock %}
