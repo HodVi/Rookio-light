@@ -3,6 +3,7 @@
 ## Introduction
 
 This project was created for the final part of the Python from Scratch course, facilitated by the Software Development Academy. 
+
 Rookio-light project is about creating Events/Services by regular people as well as business people for other users.
 
 The project used for purely personal educational purposes.
