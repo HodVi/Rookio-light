@@ -1,0 +1,33 @@
+{% extends 'room_detail.html' %}
+{% load filters %}
+
+{% block modify %}
+<div class="py-20 container mx-auto px-4">
+    {% if room.menu_items.exists %}
+        <h2 class="text-2xl font-bold mb-4 mt-6">Current Items:</h2>
+        <div class="grid md:grid-cols-3 gap-4">
+            {% for item in room.menu_items.all %}
+            <div class="border rounded p-2 border-red-900 inline-flex flex-col items-start">
+                <h3 class="text-xl font-bold">{{ item.item_name }}</h3>
+                <p class="mt-2"><span class="font-bold">Price:</span> {{ item.price }} €</p>
+                {% if item.duration %}
+                <p class="mt-2"><span class="font-bold">Duration:</span>
+                {% if item.duration == 1 %}
+                    {{ item.duration }} minute
+                {% elif item.duration < 61 %}
+                   {{ item.duration }} minutes
+                {% else %}
+                    {{ item.duration|minutes_to_hours }}
+                {% endif %}
+                </p>
+                {% endif %}
+                <p class="mt-2"><span class="font-bold">Number of Pieces:</span> {{ item.number_of_pieces }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-red-500 mt-6">No item has been added for this room yet.</p>
+    {% endif %}
+
+</div>
+{% endblock %}

@@ -1,0 +1,267 @@
+{% extends 'base.html' %}
+
+{% block title %}Rookio - Create new Room{% endblock title %}
+
+{% block content %}
+<h2 class="mb-4 text-2xl">Add new Room</h2>
+<form method="post" class="bg-white p-6 rounded shadow-lg">
+    {% csrf_token %}
+{#    {{ room_form.as_p }}#}
+    {% if room_form.non_field_errors %}
+        <div class="mb-4 text-red-500">
+            {{ room_form.non_field_errors }}
+        </div>
+    {% endif %}
+
+    <div class="mb-4">
+        <label for="{{ room_form.room_type.id_for_label }}" class="block mb-2">Room type</label>
+        <select id="{{ room_form.room_type.id_for_label }}" class="border p-2 w-full" name="{{ room_form.room_type.name }}">
+            {% for value, display in room_form.room_type.field.choices %}
+                <option value="{{ value }}" {% if room_form.room_type.value == value %}selected{% endif %}>{{ display }}</option>
+            {% endfor %}
+        </select>
+        {% if tag_names.room_type.errors %}
+            <div class="text-red-500">{{ room_form.room_type.errors }}</div>
+        {% endif %}
+    </div>
+
+    <div id="tag-container" class="space-y-4">
+        {% for tag_name in tag_names %}
+        <div class="tag-field">
+            <div class="mb-4">
+
+                <label for="tag-{{ forloop.counter }}" class="block mb-2">Tag {{ forloop.counter }}</label>
+                <div class="flex">
+                <input id="tag-{{ forloop.counter }}" class="border p-2 w-[300px]" type="text" name="tag-{{ forloop.counter }}" value="{{ tag_name|default:'' }}">
+                {% if not forloop.first %}
+                <button type="button" class="remove-tag-button ml-2 p-1 bg-red-500 text-white rounded">Remove Tag</button>
+                {% endif %}
+                </div>
+                <div class="tag-errors text-red-500">
+                    {% if messages %}
+                    {% for message in messages %}
+                        {% if "Tag" in message.message %}
+                            <div class="text-red-500">{{ message }}</div>
+                        {% endif %}
+                    {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <button type="button" id="add-tag-button" class="mt-4 p-2 bg-blue-500 text-white rounded">Add Tag</button>
+    <input type="hidden" id="total-tags" name="total-tags">
+
+
+    <div class="mb-4">
+        <label for="{{ room_form.name.id_for_label }}" class="block mb-2">Room name</label>
+        <input id="{{ room_form.name.id_for_label }}" class="border p-2 w-full" type="text" name="{{ room_form.name.name }}" value="{{ room_form.name.value|default:'' }}">
+        {% if room_form.name.errors %}
+            <div class="text-red-500">{{ room_form.name.errors }}</div>
+        {% endif %}
+    </div>
+
+{#    TODO stretch description field more to the bottom/top#}
+    <div class="mb-4">
+        <label for="{{ room_form.description.id_for_label }}" class="block mb-2">Room description</label>
+        <input id="{{ room_form.description.id_for_label }}" class="border p-2 w-full" type="text" name="{{ room_form.description.name }}" value="{{ room_form.description.value|default:'' }}">
+        {% if room_form.description.errors %}
+            <div class="text-red-500">{{ room_form.description.errors }}</div>
+        {% endif %}
+    </div>
+
+    <div class="mb-4">
+        <label for="{{ room_form.place.id_for_label }}" class="block mb-2">Place</label>
+        <input id="{{ room_form.place.id_for_label }}" class="border p-2 w-full" type="text" name="{{ room_form.place.name }}" value="{{ room_form.place.value|default:'' }}">
+        {% if room_form.place.errors %}
+            <div class="text-red-500">{{ room_form.place.errors }}</div>
+        {% endif %}
+    </div>
+
+    <div class="flex mb-4">
+        <div class="flex-1 flex flex-col justify-between pr-4 h-96">
+            <div class="mb-4">
+                <label for="{{ room_form.gps_description.id_for_label }}" class="block mb-2">GPS place description</label>
+                <input id="{{ room_form.gps_description.id_for_label }}" class="border p-2 w-full" type="text" name="{{ room_form.gps_description.name }}" value="{{ room_form.gps_description.value|default:'' }}">
+                {% if room_form.gps_description.errors %}
+                    <div class="text-red-500">{{ room_form.gps_description.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div class="mb-4">
+                <label for="{{ room_form.gps_lat.id_for_label }}" class="block mb-2">GPS latitude of place</label>
+                <input id="{{ room_form.gps_lat.id_for_label }}" class="border p-2 w-full" type="text" name="{{ room_form.gps_lat.name }}" value="{{ room_form.gps_lat.value|default:'' }}">
+                {% if room_form.gps_lat.errors %}
+                    <div class="text-red-500">{{ room_form.gps_lat.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div class="mb-4">
+                <label for="{{ room_form.gps_lng.id_for_label }}" class="block mb-2">GPS longitude of place</label>
+                <input id="{{ room_form.gps_lng.id_for_label }}" class="border p-2 w-full" type="text" name="{{ room_form.gps_lng.name }}" value="{{ room_form.gps_lng.value|default:'' }}">
+                {% if room_form.gps_lng.errors %}
+                    <div class="text-red-500">{{ room_form.gps_lng.errors }}</div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="flex-1">
+            <div id="googleMap" class="h-96 w-full border rounded"></div>
+        </div>
+    </div>
+
+{#    TODO - if Room name or Room description is already filled in, then try to read any number string and put it into date field     #}
+    <div class="mb-4">
+        <label for="{{ room_form.date.id_for_label }}" class="block mb-2">Date(yyyy-mm-dd)</label>
+        <input id="{{ room_form.date.id_for_label }}" class="border p-2 w-full" type="text" name="{{ room_form.date.name }}" value="{{ room_form.date.value|default:'' }}">
+        {% if room_form.date.errors %}
+            <div class="text-red-500">{{ room_form.date.errors }}</div>
+        {% endif %}
+    </div>
+
+    <div class="mb-4">
+        <label for="{{ room_form.time.id_for_label }}" class="block mb-2">Time(hh:mm)</label>
+        <input id="{{ room_form.time.id_for_label }}" class="border p-2 w-full" type="text" name="{{ room_form.time.name }}" value="{{ room_form.time.value|default:'' }}">
+        {% if room_form.time.errors %}
+            <div class="text-red-500">{{ room_form.time.errors }}</div>
+        {% endif %}
+    </div>
+
+    <div class="mb-4">
+        <label for="{{ room_form.outdoor.id_for_label }}" class="block mb-2">Outdoor</label>
+        <input id="{{ room_form.outdoor.id_for_label }}" class="border mr-2" type="checkbox" name="{{ room_form.outdoor.name }}" {% if room_form.outdoor.value %}checked{% endif %}>
+        {% if room_form.outdoor.errors %}
+            <div class="text-red-500">{{ room_form.outdoor.errors }}</div>
+        {% endif %}
+    </div>
+
+    <div class="mb-4">
+        <label for="{{ room_form.contact_public.id_for_label }}" class="block mb-2">Owner contact</label>
+        <input id="{{ room_form.contact_public.id_for_label }}" class="border p-2 w-full" type="text" name="{{ room_form.contact_public.name }}" value="{{ room_form.contact_public.value|default:'' }}">
+        {% if room_form.contact_public.errors %}
+            <div class="text-red-500">{{ room_form.contact_public.errors }}</div>
+        {% endif %}
+    </div>
+
+    <div class="mb-4">
+        <label for="{{ room_form.contact_after_assignment.id_for_label }}" class="block mb-2">Owner contact for attendees</label>
+        <input id="{{ room_form.contact_after_assignment.id_for_label }}" class="border p-2 w-full" type="text" name="{{ room_form.contact_after_assignment.name }}" value="{{ room_form.contact_after_assignment.value|default:'' }}">
+        {% if room_form.contact_after_assignment.errors %}
+            <div class="text-red-500">{{ room_form.contact_after_assignment.errors }}</div>
+        {% endif %}
+    </div>
+
+    <div class="mb-4">
+        <label for="{{ room_form.age_restriction.id_for_label }}" class="block mb-2">Age restrictions</label>
+        <input id="{{ room_form.age_restriction.id_for_label }}" class="border p-2 w-full" type="text" name="{{ room_form.age_restriction.name }}" value="{{ room_form.age_restriction.value|default:'' }}">
+        {% if room_form.age_restriction.errors %}
+            <div class="text-red-500">{{ room_form.age_restriction.errors }}</div>
+        {% endif %}
+    </div>
+
+    <div class="mb-4">
+        <label for="{{ room_form.age_recommendation.id_for_label }}" class="block mb-2">Age recommendation</label>
+        <input id="{{ room_form.age_recommendation.id_for_label }}" class="border p-2 w-full" type="text" name="{{ room_form.age_recommendation.name }}" value="{{ room_form.age_recommendation.value|default:'' }}">
+        {% if room_form.age_recommendation.errors %}
+            <div class="text-red-500">{{ room_form.age_recommendation.errors }}</div>
+        {% endif %}
+    </div>
+
+    <div class="mb-4">
+        <label for="{{ room_form.minimum_participants.id_for_label }}" class="block mb-2">Minimum participant</label>
+        <input id="{{ room_form.minimum_participants.id_for_label }}" class="border p-2 w-full" type="text" name="{{ room_form.minimum_participants.name }}" value="{{ room_form.minimum_participants.value|default:'' }}">
+        {% if room_form.minimum_participants.errors %}
+            <div class="text-red-500">{{ room_form.minimum_participants.errors }}</div>
+        {% endif %}
+    </div>
+
+    <div class="mb-4">
+        <label for="{{ room_form.maximum_participants.id_for_label }}" class="block mb-2">Maximum participant</label>
+        <input id="{{ room_form.maximum_participants.id_for_label }}" class="border p-2 w-full" type="text" name="{{ room_form.maximum_participants.name }}" value="{{ room_form.maximum_participants.value|default:'' }}">
+        {% if room_form.maximum_participants.errors %}
+            <div class="text-red-500">{{ room_form.maximum_participants.errors }}</div>
+        {% endif %}
+    </div>
+
+    <button type="submit" class="bg-blue-500 text-white p-2 rounded">Add Room</button>
+</form>
+
+<script src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}&libraries=places&callback=initMap" async defer></script>
+
+<script>
+    const tagNames = [{% for tag_name in tag_names %}"{{ tag_name }}"{% if not forloop.last %}, {% endif %}{% endfor %}];
+    const tagContainer = document.getElementById('tag-container');
+    const addTagButton = document.getElementById('add-tag-button');
+    const totalTagsInput = document.getElementById('total-tags');
+    let tagCount = document.querySelectorAll('.tag-field').length;
+
+    totalTagsInput.value = tagCount;  // Set initial value
+
+    let totalTagsEverCreated = 1;
+
+    addTagButton.addEventListener('click', function() {
+        if (tagCount < 10) {
+            tagCount++;
+            totalTagsEverCreated++;
+            totalTagsInput.value = tagCount;  // Update total count
+
+            const newTagField = document.createElement('div');
+            newTagField.className = 'tag-field';
+            newTagField.innerHTML = `
+                <div class="mb-4">
+                    <label for="tag-${totalTagsEverCreated}" class="block mb-2">Tag ${tagCount}</label>
+                    <div class="flex">
+                        <input id="tag-${totalTagsEverCreated}" class="border p-2 w-[300px]" type="text" name="tag-${totalTagsEverCreated}" value="${tagNames[tagCount-1] || ''}">
+                        <button type="button" class="remove-tag-button ml-2 p-1 bg-red-500 text-white rounded">Remove Tag</button>
+                    </div>
+                    <div class="tag-errors text-red-500"></div>
+                </div>
+            `;
+            tagContainer.appendChild(newTagField);
+        }
+    });
+
+    tagContainer.addEventListener('click', function(event) {
+        if (event.target.classList.contains('remove-tag-button') && event.target.parentNode.parentNode !== tagContainer.firstElementChild) {
+            event.target.parentNode.parentNode.remove();
+            tagCount--;
+            totalTagsInput.value = tagCount;  // Update total count
+        }
+    });
+
+    let map;
+    function initMap() {
+        // Default coordinates
+        const defaultLocation = {lat: 49.255277, lng: 21.786310};
+
+        map = new google.maps.Map(document.getElementById('googleMap'), {
+            center: defaultLocation,
+            zoom: 13
+        });
+
+        google.maps.event.addListener(map, 'click', function(event) {
+            const latitude = event.latLng.lat();
+            const longitude = event.latLng.lng();
+
+            // Update form fields
+            document.getElementById('{{ room_form.gps_lat.id_for_label }}').value = latitude.toFixed(6);
+            document.getElementById('{{ room_form.gps_lng.id_for_label }}').value = longitude.toFixed(6);
+
+            // Fetching place name using Reverse Geocoding
+            const geocoder = new google.maps.Geocoder();
+            geocoder.geocode({'location': event.latLng}, function(results, status) {
+                if (status === 'OK' && results[0]) {
+                    document.getElementById('{{ room_form.gps_description.id_for_label }}').value = results[0].formatted_address;
+                } else {
+                    console.error('No results found for the clicked location.');
+                }
+            });
+        });
+    }
+
+    {#// Call the function to initialize the map#}
+    {#initMap();#}
+</script>
+
+{% endblock %}

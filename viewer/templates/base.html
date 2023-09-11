@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% block favicon %}{% endblock %}
+
+    <title>{% block title %}{% endblock %}</title>
+
+    <!-- Tailwind CSS file -->
+    <link href="{% static 'output.css' %}" rel="stylesheet">
+</head>
+<body class="bg-gray-200 text-gray-800">
+    <header>
+        <nav class="p-2 bg-white border-b-2 border-gray-200 flex justify-between items-center">
+            <div class="flex items-center mr-12">
+{#            ToDo - somehow make mark which link is now active/displayed#}
+                <a href="{% url 'welcome' %}" class="text-gray-800 text-2xl font-bold hover:text-blue-500 transition-colors duration-200">Rookio Logo</a>
+                <a href="{% url 'rooms_overview' %}" class="p-6 ml-4 text-gray-800 hover:text-blue-500 transition-colors duration-200">Rooms Overview</a>
+                <a href="{% url 'my_items' %}" class="p-2 ml-4 text-gray-800 hover:text-blue-500 transition-colors duration-200">My Items</a>
+{#                <a href="#" class="p-2 ml-4 text-gray-800">Link 3</a>#}
+                {% if user.is_authenticated %}
+                <a href="{% url 'my_rooms' %}" class="p-2 ml-4 text-gray-800 hover:text-blue-500 transition-colors duration-200">My Rooms</a>
+                {% endif %}
+                {% if user.is_authenticated %}
+                <a href="{% url 'add_room' %}" class="p-2 ml-4 text-gray-800 hover:text-blue-500 transition-colors duration-200">Add new Room</a>
+                {% endif %}
+            </div>
+            <div id="auth-buttons" class="flex items-center space-x-4">
+                {% if user.is_authenticated %}
+                    <!-- If the user is authenticated, display the user's name and the logout button -->
+                    <span class="mr-4 text-gray-600">Hello, {{ user.username }}!</span>
+                    <a href="{% url 'logout' %}" class="px-4 py-2 rounded bg-red-500 text-white hover:bg-red-700 transition-colors duration-200">Logout</a>
+                {% else %}
+                     <!-- If the user is not authenticated, display the login and registration buttons -->
+                    <a href="{% url 'login' %}" id="login-button" class="px-4 py-2 rounded bg-blue-500 text-white hover:bg-blue-700 transition-colors duration-200">Login</a>
+                    <a href="{% url 'register' %}" id="register-button" class="px-4 py-2 rounded bg-green-500 text-white hover:bg-green-700 transition-colors duration-200">Registration</a>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
+    <main class="p-6">
+
+{#    {% if messages %}#}
+{#    <ul class="messages">#}
+{#        {% for message in messages %}#}
+{#            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>#}
+{#        {% endfor %}#}
+{#    </ul>#}
+{#    {% endif %}#}
+        {% block content %}
+        {% endblock content %}
+    </main>
+
+</body>
+</html>

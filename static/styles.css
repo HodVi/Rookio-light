@@ -1,0 +1,27 @@
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@keyframes blink {
+  0% {opacity: 1;}
+  65% {opacity: 1;}
+  100% {opacity: 0;}
+}
+
+@keyframes colorBlink {
+    0%   {background-color: #020617; color: white;}
+    50%  {background-color: #b91c1c; color: white;}
+    100% {background-color: #020617; color: white;}
+}
+
+.blink-on-hover:hover {
+    animation: colorBlink 500ms linear infinite;
+}
+
+.group:hover .group-hover\:block {
+    display: block;
+}
+.group-hover\:block {
+    display: none;
+}

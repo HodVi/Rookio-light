@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load tz %}
+
+{% block title %}Rookio - My Rooms{% endblock title %}
+
+{% block content %}
+<div class="container mx-auto px-4">
+    <h2 class="text-2xl font-bold mb-4">My Rooms:</h2>
+    <ul>
+        {% for room in rooms %}
+        <li class="mb-4 border rounded p-4 border-red-900">
+            <a href="{% url 'room_detail' room.id %}" class="block hover:bg-gray-200">
+                <h3 class="text-xl font-bold">{{ room.name }}</h3>
+{#                TODO decide what to add here#}
+
+                {% for tag in room.tags.all %}
+                    {{ tag.name }}{% if not forloop.last %} ‧ {% endif %}
+                {% empty %}
+                    No tags.
+                {% endfor %}
+
+                <p class="mt-2"><span class="font-bold">Type:</span> {{ room.get_room_type_display }}</p>
+                <p class="mt-2"><span class="font-bold">Description:</span> {{ room.description }}</p>
+                <p class="mt-2"><span class="font-bold">Place:</span> {{ room.place }}</p>
+            </a>
+        </li>
+        {% empty %}
+        <li class="text-red-500 animate-blink">{{request.user.username}}, you have not yet created any room.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

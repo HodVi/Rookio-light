@@ -4,13 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="34bf23ce-0f23-4c8a-a234-516d2d35d0cf" name="Changes" comment="initial commit">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="34bf23ce-0f23-4c8a-a234-516d2d35d0cf" name="Changes" comment="update README.md" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Merge.Settings">
     <option name="BRANCH" value="origin/main" />
@@ -19,13 +28,17 @@
     <branch-grouping />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="develop" />
+        <entry key="$PROJECT_DIR$" value="feature" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="SYNC" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2RQxisB0TlTiXa68rrcJO5UnnVd" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -34,20 +47,36 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "D:/Projects/SDA-Final-Project",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
+    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;18.16.1&quot;,
+    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;18.16.1&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Projects/SDA-Final-Project/Rookio/settings.py&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;sqlite&quot;
+    ]
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Projects\SDA-Final-Project\viewer\templatetags" />
+      <recent name="D:\Projects\SDA-Final-Project" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration>C:\Users\Alfonz\AppData\Roaming\Subversion</configuration>
@@ -65,6 +94,56 @@
       <workItem from="1687295999237" duration="48000" />
       <workItem from="1687296055381" duration="1205000" />
       <workItem from="1687360337048" duration="5041000" />
+      <workItem from="1687428563020" duration="1797000" />
+      <workItem from="1687596209457" duration="631000" />
+      <workItem from="1687625993823" duration="1840000" />
+      <workItem from="1687703023313" duration="20000" />
+      <workItem from="1687971704266" duration="3105000" />
+      <workItem from="1688304042873" duration="17460000" />
+      <workItem from="1688372959290" duration="10282000" />
+      <workItem from="1688668871382" duration="603000" />
+      <workItem from="1688750164341" duration="8356000" />
+      <workItem from="1688801337026" duration="36000" />
+      <workItem from="1688802766667" duration="14835000" />
+      <workItem from="1688888622622" duration="2800000" />
+      <workItem from="1688893356066" duration="16000" />
+      <workItem from="1688893382400" duration="1122000" />
+      <workItem from="1688894675533" duration="27000" />
+      <workItem from="1688894800923" duration="83000" />
+      <workItem from="1688894914714" duration="855000" />
+      <workItem from="1688895969622" duration="42000" />
+      <workItem from="1688896121590" duration="3895000" />
+      <workItem from="1688900078076" duration="25863000" />
+      <workItem from="1688967621689" duration="44608000" />
+      <workItem from="1689090140005" duration="14987000" />
+      <workItem from="1689175950533" duration="10046000" />
+      <workItem from="1689234831569" duration="9693000" />
+      <workItem from="1689345963949" duration="10539000" />
+      <workItem from="1689415540682" duration="3104000" />
+      <workItem from="1689501121299" duration="3673000" />
+      <workItem from="1689627527762" duration="1352000" />
+      <workItem from="1689684327568" duration="13757000" />
+      <workItem from="1689753094223" duration="2568000" />
+      <workItem from="1689778783708" duration="9382000" />
+      <workItem from="1689876239057" duration="472000" />
+      <workItem from="1689876762255" duration="7073000" />
+      <workItem from="1689965151933" duration="145000" />
+      <workItem from="1689965344650" duration="30355000" />
+      <workItem from="1690182440079" duration="27198000" />
+      <workItem from="1690220363683" duration="14459000" />
+      <workItem from="1690267676425" duration="27707000" />
+      <workItem from="1690354990638" duration="22406000" />
+      <workItem from="1690400969915" duration="2106000" />
+      <workItem from="1690467029155" duration="25751000" />
+      <workItem from="1690520863739" duration="44551000" />
+      <workItem from="1690731566778" duration="1209000" />
+      <workItem from="1691084471149" duration="1237000" />
+      <workItem from="1691176928572" duration="1608000" />
+      <workItem from="1691224039377" duration="857000" />
+      <workItem from="1691248391502" duration="1543000" />
+      <workItem from="1691330736430" duration="653000" />
+      <workItem from="1691431129539" duration="81986000" />
+      <workItem from="1694462396499" duration="3838000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1687198242751</created>
@@ -87,7 +166,143 @@
       <option name="project" value="LOCAL" />
       <updated>1687363123118</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="added new templates, models, forms, views&#10;added Tailwind for css&#10;updated requirements">
+      <option name="closed" value="true" />
+      <created>1689011427986</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1689011427986</updated>
+    </task>
+    <task id="LOCAL-00005" summary="fixed - assigning the currently logged-in user as the owner of the newly created room&#10;added - display of owner's name to rooms overview&#10;      - style to rooms_overview.html&#10;modified - rebuild of output.css">
+      <option name="closed" value="true" />
+      <created>1689105919147</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1689105919147</updated>
+    </task>
+    <task id="LOCAL-00006" summary="added - time/date filter to Rooms Overview&#10;code cleaning">
+      <option name="closed" value="true" />
+      <created>1689346141409</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1689346141409</updated>
+    </task>
+    <task id="LOCAL-00007" summary="added - tag implementation into &quot;Add new Room&quot;, up to 10 tags per room -&gt; validation of uniqueness, re-rendering">
+      <option name="closed" value="true" />
+      <created>1689884341765</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1689884341765</updated>
+    </task>
+    <task id="LOCAL-00008" summary="added - tag implementation into &quot;Add new Room&quot;, up to 10 tags per room -&gt; validation of uniqueness, re-rendering&#10;- display tags on the &quot;Rooms Overview&quot; page.">
+      <option name="closed" value="true" />
+      <created>1689886806565</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1689886806565</updated>
+    </task>
+    <task id="LOCAL-00009" summary="added - &quot;My Rooms&quot; overview of rooms created by logged-in user with possibility of redirection to details of selected room">
+      <option name="closed" value="true" />
+      <created>1690112414935</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1690112414935</updated>
+    </task>
+    <task id="LOCAL-00010" summary="added - makemigrations for Participant's nickname and template's name to be no longer Null/Blank True">
+      <option name="closed" value="true" />
+      <created>1690114309415</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1690114309415</updated>
+    </task>
+    <task id="LOCAL-00011" summary="added - Room detail extended with possibility to add items for selected room, created placeholder and templates for edit/delete options">
+      <option name="closed" value="true" />
+      <created>1690224285567</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1690224285567</updated>
+    </task>
+    <task id="LOCAL-00012" summary="added - Room detail extended with possibility to edit/delete items for selected room">
+      <option name="closed" value="true" />
+      <created>1690234923469</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1690234923469</updated>
+    </task>
+    <task id="LOCAL-00013" summary="added - Room detail - edit data of room(Room's model fields)">
+      <option name="closed" value="true" />
+      <created>1690318346092</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1690318346092</updated>
+    </task>
+    <task id="LOCAL-00014" summary="added - Rooms Overview - design,&#10;models.py - custom intermediate table for PersonParticipantMenuItem">
+      <option name="closed" value="true" />
+      <created>1690521611571</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1690521611571</updated>
+    </task>
+    <task id="LOCAL-00015" summary="remove - messages from base.html&#10;added - items to select for users in room&#10;- styles for login/reg page">
+      <option name="closed" value="true" />
+      <created>1691534381019</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1691534381019</updated>
+    </task>
+    <task id="LOCAL-00016" summary="added - Google Maps API">
+      <option name="closed" value="true" />
+      <created>1691616505102</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1691616505103</updated>
+    </task>
+    <task id="LOCAL-00017" summary="update README.md">
+      <option name="closed" value="true" />
+      <created>1691755481324</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1691755481324</updated>
+    </task>
+    <task id="LOCAL-00018" summary="update README.md">
+      <option name="closed" value="true" />
+      <created>1691755637583</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1691755637583</updated>
+    </task>
+    <task id="LOCAL-00019" summary="update README.md">
+      <option name="closed" value="true" />
+      <created>1691755839296</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1691755839296</updated>
+    </task>
+    <task id="LOCAL-00020" summary="update README.md">
+      <option name="closed" value="true" />
+      <created>1694466581781</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1694466581781</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -109,6 +324,23 @@
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
     <MESSAGE value="initial commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="initial commit" />
+    <MESSAGE value="added new templates, models, forms, views&#10;added Tailwind for css&#10;updated requirements" />
+    <MESSAGE value="fixed - assigning the currently logged-in user as the owner of the newly created room&#10;added - display of owner's name to rooms overview&#10;      - style to rooms_overview.html&#10;modified - rebuild of output.css" />
+    <MESSAGE value="added - time/date filter to Rooms Overview&#10;code cleaning" />
+    <MESSAGE value="added - tag implementation into &quot;Add new Room&quot;, up to 10 tags per room -&gt; validation of uniqueness, re-rendering" />
+    <MESSAGE value="added - tag implementation into &quot;Add new Room&quot;, up to 10 tags per room -&gt; validation of uniqueness, re-rendering&#10;- display tags on the &quot;Rooms Overview&quot; page." />
+    <MESSAGE value="added - &quot;My Rooms&quot; overview of rooms created by logged-in user with possibility of redirection to details of selected room" />
+    <MESSAGE value="added - makemigrations for Participant's nickname and template's name to be no longer Null/Blank True" />
+    <MESSAGE value="added - Room detail extended with possibility to add items for selected room, created placeholder and templates for edit/delete options" />
+    <MESSAGE value="added - Room detail extended with possibility to edit/delete items for selected room" />
+    <MESSAGE value="added - Room detail - edit data of room(Room's model fields)" />
+    <MESSAGE value="added - Rooms Overview - design,&#10;models.py - custom intermediate table for PersonParticipantMenuItem" />
+    <MESSAGE value="remove - messages from base.html&#10;added - items to select for users in room&#10;- styles for login/reg page" />
+    <MESSAGE value="added - Google Maps API" />
+    <MESSAGE value="update README.md" />
+    <option name="LAST_COMMIT_MESSAGE" value="update README.md" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/SDA_Final_Project$views.coverage" NAME="views Coverage Results" MODIFIED="1690319026086" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/viewer" />
   </component>
 </project>

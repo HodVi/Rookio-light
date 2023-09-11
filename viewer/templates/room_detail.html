@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% load tz %}
+
+{% block title %}Rookio - Room Detail{% endblock title %}
+
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<div class="container mx-auto px-4">
+
+    <div class="py-2 flex justify-between space-x-35">
+        <a href="{% url 'my_rooms' %}" class="p-2 bg-blue-500 hover:bg-blue-700 text-white rounded mb-4 inline-block">Back to My Rooms</a>
+
+{#        ToDo - If/else Activate if a room is deactivated and vice versa and make it as circle shape button#}
+{#        {% if room.hidden_from_public %}#}
+{#            <a href="{% url 'toggle_room_visibility' room.id %}" class="p-2 bg-blue-500 hover:bg-blue-700 text-white rounded mb-4 inline-block">Activate to be public</a>#}
+{#        {% else %}#}
+{#            <a href="{% url 'toggle_room_visibility' room.id %}" class="p-2 bg-blue-500 hover:bg-blue-700 text-white rounded mb-4 inline-block">Deactivate to be public</a>#}
+{#        {% endif %}#}
+        {% if room.hidden_from_public %}
+            <a href="{% url 'toggle_room_visibility' room.id %}" class="p-3 bg-green-500 hover:bg-green-700 text-white rounded-full mb-4 inline-block focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-600">
+                Activate to be public
+                <i class="fas fa-eye fa-lg"></i>
+            </a>
+        {% else %}
+            <a href="{% url 'toggle_room_visibility' room.id %}" class="p-3 bg-red-500 hover:bg-red-700 blink-on-hover text-white rounded-full mb-4 inline-block focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-600">
+                Deactivate to be public
+                <i class="fas fa-eye-slash fa-lg"></i>
+            </a>
+        {% endif %}
+
+        <a href="{% url 'edit_room' room.id %}" class="p-2 bg-blue-500 hover:bg-blue-700 text-white rounded mb-4 inline-block float-right">Modify Room</a>
+    </div>
+
+    <div class="border rounded p-4 border-red-900">
+        <h3 class="text-xl font-bold">{{ room.name }}</h3>
+
+        {% for tag in room.tags.all %}
+            {{ tag.name }}{% if not forloop.last %} ‧ {% endif %}
+        {% empty %}
+            No tags.
+        {% endfor %}
+
+        <p class="mt-2"><span class="font-bold">Description:</span> {{ room.description }}</p>
+        <div class="flex space-x-4">
+            <div class="flex-1">
+                <p class="mt-2"><span class="font-bold">Place:</span> {{ room.place }}</p>
+                <p class="mt-2"><span class="font-bold">Date:</span> {{ room.date|date:'d.m.Y' }} </p>
+        {#            TODO - fix timezone#}
+                <p class="mt-2"><span class="font-bold">Time:</span> {{ room.time|time:'H:i' }} {{ room.time|timezone:'Europe/Bratislava' }}</p>
+        {#        TODO - decide what to add here#}
+                <p class="mt-2"><span class="font-bold">Gps description:</span> {{ room.gps_description }}</p>
+                <p class="mt-2"><span class="font-bold">Gps latitude:</span> {{ room.gps_lat }}</p>
+                <p class="mt-2"><span class="font-bold">Gps longitude:</span> {{ room.gps_lng }}</p>
+                <p class="mt-2"><span class="font-bold">Public contact:</span> {{ room.contact_public }}</p>
+            </div>
+
+            <div class="flex-1">
+                <div id="detailGoogleMap" class="h-96 w-full border rounded"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="py-2 flex justify-between space-x-40">
+        <div class="group inline-block relative">
+            {% if room.id %}
+                <a href="{% url 'show_items' room.id %}" class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded inline-flex items-center">
+            {% endif %}
+            <span>Items</span>
+            </a>
+            <div class="absolute left-0 mt-2 py-2 w-auto bg-white rounded-lg shadow-xl border border-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex justify-center items-center">
+                {% if room.id %}
+                    <a href="{% url 'add_item' room.id %}" class="mx-2 w-20 py-2 text-white rounded bg-green-500 hover:bg-green-700 text-center">Add</a>
+                    <a href="{% url 'edit_item' room.id %}" class="mx-2 w-20 py-2 text-white rounded bg-orange-500 hover:bg-orange-700 text-center">Edit</a>
+                {% endif %}
+            </div>
+            </div>
+
+            <div class="group inline-block relative">
+                <button class="bg-blue-500 text-white font-semibold py-2 px-4 rounded inline-flex items-center">
+                    <span>Images</span>
+                </button>
+                <div class="absolute left-0 mt-2 py-2 w-auto bg-white rounded-lg shadow-xl border border-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex justify-center items-center">
+                    <a href="#" class="mx-2 w-20 py-2 text-white rounded bg-green-500 hover:bg-green-700 text-center">Add</a>
+                    <a href="#" class="mx-2 w-20 py-2 text-white rounded bg-orange-500 hover:bg-orange-700 text-center">Edit</a>
+                </div>
+            </div>
+
+            <div class="group inline-block relative">
+                <button class="bg-blue-500 text-white font-semibold py-2 px-4 rounded inline-flex items-center">
+                    <span>Permissions</span>
+                </button>
+                <div class="absolute left-0 mt-2 py-2 w-auto bg-white rounded-lg shadow-xl border border-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex justify-center items-center">
+                    <a href="#" class="mx-2 w-20 py-2 text-white rounded bg-green-500 hover:bg-green-700 text-center">Add</a>
+                    <a href="#" class="mx-2 w-20 py-2 text-white rounded bg-orange-500 hover:bg-orange-700 text-center">Edit</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}"></script>
+
+<script>
+    function initDetailMap() {
+        const roomLocation = {
+            lat: {{ room.gps_lat }},
+            lng: {{ room.gps_lng }}
+        };
+
+        const map = new google.maps.Map(document.getElementById('detailGoogleMap'), {
+            center: roomLocation,
+            zoom: 15
+        });
+
+        new google.maps.Marker({
+            position: roomLocation,
+            map: map,
+            title: "{{ room.gps_description }}"
+        });
+    }
+
+    // Call the function to initialize the map
+    initDetailMap();
+</script>
+
+{% block modify %}
+{% endblock %}
+
+{% endblock %}
