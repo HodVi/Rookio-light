@@ -188,9 +188,18 @@ def edit_room(request, room_id):
 
 
 def rooms_overview(request):
-    rooms = Room.objects.all()
+    # rooms = Room.objects.all()
+    # rooms = Room.objects.filter(hidden_from_public=False)
+
     # TODO - make a calculations according to the number of registered participants
     # number_of_available_places = None
+    query = request.GET.get('tag_search')
+
+    if query:
+        # Filter rooms based on the tags and hidden_from_public value
+        rooms = Room.objects.filter(tags__name__iexact=query, hidden_from_public=False).distinct()
+    else:
+        rooms = Room.objects.filter(hidden_from_public=False)
 
     serialized_rooms = serialize('json', rooms)
 
@@ -203,6 +212,22 @@ def room_detail(request, room_id):
     room = get_object_or_404(Room, id=room_id)
 
     return render(request, 'room_detail.html', {'room': room})
+
+
+@login_required
+def toggle_room_visibility(request, room_id):
+    room = get_object_or_404(Room, id=room_id)
+
+    # Check if the current user is an owner of the room
+    if not room.owners.filter(user_person_owner=request.user).exists():
+        messages.error(request, "You don't have permission to change this room's visibility.")
+        return redirect('room_detail', room_id=room.id)
+
+    # Toggle the hidden_from_public value
+    room.hidden_from_public = not room.hidden_from_public
+    room.save()
+
+    return redirect('room_detail', room_id=room.id)
 
 
 @login_required
@@ -284,8 +309,8 @@ def room_detail_with_items(request, room_id):
             if quantity:
                 try:
                     quantity = int(quantity)
-                    if quantity < 0 or quantity >= item.number_of_pieces or quantity > 5:
                     # if quantity < 0 or quantity > item.number_of_pieces:
+                    if quantity < 0 or quantity >= item.number_of_pieces or quantity > 5:
                         raise ValueError
                 except ValueError:
                     messages.error(request, f"Invalid quantity for item {item.item_name}. Maximum is 5!")
@@ -303,8 +328,8 @@ def room_detail_with_items(request, room_id):
 
                 # Subtract the ordered quantity from the number of pieces of the menu item
                 # Check if the remaining number of pieces would not go below zero
-                if item.number_of_pieces - quantity < 1:
                 # if item.number_of_pieces - quantity < 0:
+                if item.number_of_pieces - quantity < 1:
                     messages.error(request, f"Not enough {item.item_name} left.")
                     return render(request, 'room_overview_detail.html', {'room': room, 'menu_items': menu_items})
 
@@ -371,4 +396,14 @@ def check_nickname_view(request):
         messages.error(request, 'Enter correct Nickname')
         return render(request, 'nickname_form.html')
     room_items = get_rooms_and_items(participant)
-    return render(request, 'my_items.html', {'room_items': room_items})
+
+    room_data_list = [
+        {
+            'gps_lat': room.gps_lat,
+            'gps_lng': room.gps_lng,
+            'gps_description': room.gps_description
+        }
+        for room, _ in room_items
+    ]
+
+    return render(request, 'my_items.html', {'room_items': room_items, 'room_data_list': room_data_list,})

@@ -4,9 +4,17 @@
 {% block title %}Rookio - Rooms Overview{% endblock title %}
 
 {% block content %}
+
+<div class="flex justify-center mt-4 mb-8">
+    <form method="get" action="{% url 'rooms_overview' %}" class="flex">
+        <input type="text" name="tag_search" value="{{ query }}" placeholder="Enter tag to search..." class="border rounded-l px-4 py-2">
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-r hover:bg-blue-600">Use filter</button>
+    </form>
+</div>
+
 <div class="container mx-auto px-4 grid grid-cols-3 gap-4">
     {% for room in rooms %}
-    <div class="room relative rounded-b-lg border-black p-4 shadow-md shadow-black hover:shadow-fuchsia-950">
+    <div class="room relative rounded-b-lg border-black p-4 shadow-md shadow-black hover:shadow-blue-700">
 
 {#        Overlay#}
         <div class="overlay fixed inset-0 bg-black bg-opacity-50 hidden z-10"></div>
