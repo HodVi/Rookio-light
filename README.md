@@ -4,9 +4,19 @@
 
 This project was created for the final part of the Python from Scratch course, facilitated by the Software Development Academy. 
 
-Rookio-light project is about creating Events/Services by regular people as well as business people for other users.
+Rookio-light project is about creating Events/Services by regular people w/wo a business for other users.
+It allows an unauthenticated user to search for available rooms in the list and participate in events or use the services offered by the room, under a unique nickname.
+A logged-in user has the possibility to create a custom room and add his own custom items to it.
 
-The project used for purely personal educational purposes.
+The project is used for purely personal educational purposes.
+
+## Screenshots 
+
+<img src="images_overview/rooms_overview.png" alt="overview" width="350" height="130"/>
+<img src="images_overview/my_items.png" alt="my_items" width="350" height="130"/>
+<img src="images_overview/add_room.png" alt="add_room" width="350"/>
+<img src="images_overview/my_room.png" alt="my_room" width="350"/>
+
 
 ## Technologies Used
 

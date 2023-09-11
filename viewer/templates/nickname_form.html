@@ -11,6 +11,13 @@
         <div class="mt-4">
             <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Check</button>
         </div>
+         {% if messages %}
+            <div class="mt-4 mx-auto">
+                {% for message in messages %}
+                <p class="text-blue-500 animate-blink px-6 py-4 border-0 rounded relative mb-4 bg-{{ message.tags }}-500">{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
 
     </form>
 </div>

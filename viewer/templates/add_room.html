@@ -32,7 +32,7 @@
 
                 <label for="tag-{{ forloop.counter }}" class="block mb-2">Tag {{ forloop.counter }}</label>
                 <div class="flex">
-                <input id="tag-{{ forloop.counter }}" class="border p-2 flex-grow" type="text" name="tag-{{ forloop.counter }}" value="{{ tag_name|default:'' }}">
+                <input id="tag-{{ forloop.counter }}" class="border p-2 w-[300px]" type="text" name="tag-{{ forloop.counter }}" value="{{ tag_name|default:'' }}">
                 {% if not forloop.first %}
                 <button type="button" class="remove-tag-button ml-2 p-1 bg-red-500 text-white rounded">Remove Tag</button>
                 {% endif %}
@@ -105,7 +105,7 @@
                 {% endif %}
             </div>
         </div>
-        {#    TODO - place for google maps API#}
+
         <div class="flex-1">
             <div id="googleMap" class="h-96 w-full border rounded"></div>
         </div>
@@ -212,7 +212,7 @@
                 <div class="mb-4">
                     <label for="tag-${totalTagsEverCreated}" class="block mb-2">Tag ${tagCount}</label>
                     <div class="flex">
-                        <input id="tag-${totalTagsEverCreated}" class="border p-2 flex-grow" type="text" name="tag-${totalTagsEverCreated}" value="${tagNames[tagCount-1] || ''}">
+                        <input id="tag-${totalTagsEverCreated}" class="border p-2 w-[300px]" type="text" name="tag-${totalTagsEverCreated}" value="${tagNames[tagCount-1] || ''}">
                         <button type="button" class="remove-tag-button ml-2 p-1 bg-red-500 text-white rounded">Remove Tag</button>
                     </div>
                     <div class="tag-errors text-red-500"></div>
